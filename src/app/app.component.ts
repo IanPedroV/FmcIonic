@@ -4,11 +4,17 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
+import { HomePage } from '../pages/home/home';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage:any = TabsPage;
+
+  public paginas = [
+    { titulo: 'Agendamentos', componente: HomePage, icone: 'calendar' },
+    { titulo: 'Perfil', componente: HomePage, icone: 'person' }
+  ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
