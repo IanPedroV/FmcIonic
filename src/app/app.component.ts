@@ -12,8 +12,8 @@ export class MyApp {
   rootPage:any = TabsPage;
 
   public paginas = [
-    { titulo: 'Agendamentos', componente: HomePage, icone: 'calendar' },
-    { titulo: 'Perfil', componente: HomePage, icone: 'person' }
+    { titulo: 'Loja', componente: HomePage, icone: 'cash' },
+    { titulo: 'Configurações', componente: HomePage, icone: 'settings' }
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
