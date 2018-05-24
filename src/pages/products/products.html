@@ -14,13 +14,13 @@
 
   <ion-toolbar>
     <ion-segment [(ngModel)]="category" color="warning">
-      <ion-segment-button value="vips">
+      <ion-segment-button value="VIPS">
         VIPS
       </ion-segment-button>
-      <ion-segment-button value="passes">
+      <ion-segment-button value="PASSES">
         PASSES DE BAT.
       </ion-segment-button>
-      <ion-segment-button value="caixas">
+      <ion-segment-button value="CAIXAS">
         CAIXAS MIST.
       </ion-segment-button>
     </ion-segment>
@@ -29,74 +29,15 @@
 
 <ion-content>
   <div [ngSwitch]="category">
-    <ion-list *ngSwitchCase="'vips'">
-      <ion-item (click)="showDetails('VIP Lendário')">
-        <ion-thumbnail item-start>
-          <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/2371470d77ce816fef4f21ec773ab0836f6d874d.png">
-        </ion-thumbnail>
-        <h2>VIP Lendário</h2>
-        <p>Alguma informação</p>
-        <button ion-button clear item-end color="warning">Ver</button>
-      </ion-item>
-
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/d2a73e55ba219acd84d9add82f64055c1bc21b04.png">
-        </ion-thumbnail>
-        <h2>VIP Lendário</h2>
-        <p>Alguma informação</p>
-        <button ion-button clear item-end color="warning">Ver</button>
-      </ion-item>
-
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/3c34b569fddd386b8c6b7283df8e34eaabc704a2.png">
-        </ion-thumbnail>
-        <h2>VIP Épico</h2>
-        <p>Alguma informação</p>
-        <button ion-button clear item-end color="warning">Ver</button>
-      </ion-item>
-    </ion-list>
-
-    <ion-list *ngSwitchCase="'passes'">
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img
-            src="https://dunb17ur4ymx4.cloudfront.net/packages/images/2670dd47b99146ce668c11ce774ff0d405b4ef59.png">
-        </ion-thumbnail>
-        <h2>Kit Refletz</h2>
-        <p>Alguma informação</p>
-        <button ion-button clear item-end color="warning">Ver</button>
-      </ion-item>
-
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/a60c777edace2a14a3be41fd99af974adfc4f001.png">
-        </ion-thumbnail>
-        <h2>Kit Baixa</h2>
-        <p>Alguma informação</p>
-        <button ion-button clear item-end color="warning">Ver</button>
-      </ion-item>
-
-    </ion-list>
-    <ion-list *ngSwitchCase="'caixas'">
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/c00392cfc01840af91b09d5d1e0d80c61f559cfa.png">
-        </ion-thumbnail>
-        <h2>Kit Jazz</h2>
-        <p>Alguma informação</p>
-        <button ion-button clear item-end color="warning">Ver</button>
-      </ion-item>
-
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/7453ba34779dcd1e64393fca8faee9bfe5a77dc7.png">
-        </ion-thumbnail>
-        <h2>Kit Spok</h2>
-        <p>Alguma informação</p>
-        <button ion-button clear item-end color="warning">Ver</button>
-      </ion-item>
-    </ion-list>
+    <ng-container *ngFor="let category of categoryList">
+      <ion-list *ngSwitchCase="category.name">
+        <ion-item (click)="showDetails(product)" *ngFor="let product of productList">
+          <ion-thumbnail item-start><img src={{product.image}}></ion-thumbnail>
+          <h2>{{product.name}}</h2>
+          <p>{{product.description}}</p>
+          <button ion-button clear item-end color="warning">Ver</button>
+        </ion-item>
+      </ion-list>
+    </ng-container>
   </div>
 </ion-content>

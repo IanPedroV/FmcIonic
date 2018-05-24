@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {NavParams} from 'ionic-angular';
-import {HomePage} from '../home/home';
 import {ProductsPage} from "../products/products";
 import {FeedPage} from "../feed/feed";
 
@@ -9,9 +8,9 @@ import {FeedPage} from "../feed/feed";
   templateUrl: 'tabs.html',
 })
 export class TabsPage {
-  tab1Root: any = ProductsPage;
-  tab2Root: any = HomePage;
-  tab3Root: any = FeedPage;
+  tab1Root: any = ProductsPage.name;
+  tab2Root: any = ProductsPage.name;
+  tab3Root: any = FeedPage.name;
   mySelectedIndex: number;
 
   constructor(navParams: NavParams) {
