@@ -1,12 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ProductsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {Component} from '@angular/core';
+import {IonicPage, ModalController} from 'ionic-angular';
+import {ModalPage} from "../modal/modal";
 
 @IonicPage()
 @Component({
@@ -14,12 +8,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'products.html',
 })
 export class ProductsPage {
+  category: string = 'vips';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private modal: ModalController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProductsPage');
+  showDetails(productName: string) {
+   // if (productName == 'VIP Lendário') {
+      const myModal = this.modal.create(ModalPage.name);
+      myModal.present();
+    //}
   }
 
 }

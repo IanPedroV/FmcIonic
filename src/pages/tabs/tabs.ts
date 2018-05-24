@@ -9,8 +9,8 @@ import {FeedPage} from "../feed/feed";
   templateUrl: 'tabs.html',
 })
 export class TabsPage {
-  tab1Root: any = HomePage;
-  tab2Root: any = ProductsPage;
+  tab1Root: any = ProductsPage;
+  tab2Root: any = HomePage;
   tab3Root: any = FeedPage;
   mySelectedIndex: number;
 
