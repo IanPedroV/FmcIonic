@@ -12,7 +12,7 @@ export class ModalPage {
   }
 
   closeModal() {
-    this.viewController.dismiss();
+    this.viewController.dismiss(this.viewController.data);
   }
 
 }

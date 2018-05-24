@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, ModalController} from 'ionic-angular';
+import {IonicPage, Modal, ModalController} from 'ionic-angular';
 import {ModalPage} from "../modal/modal";
 
 @IonicPage()
@@ -14,10 +14,8 @@ export class ProductsPage {
   }
 
   showDetails(productName: string) {
-   // if (productName == 'VIP Lendário') {
-      const myModal = this.modal.create(ModalPage.name);
-      myModal.present();
-    //}
+    let myModal: Modal = this.modal.create(ModalPage.name, {name: productName});
+    myModal.present();
   }
 
 }
