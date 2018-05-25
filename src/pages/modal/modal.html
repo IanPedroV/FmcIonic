@@ -9,7 +9,7 @@
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>{{viewController.data.name}}</ion-title>
+    <ion-title></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -23,7 +23,7 @@
   <hr style="height: 3px; color: black">
   <ion-card>
     <ion-card-header>
-      Benefícios:
+      {{product.name}}
     </ion-card-header>
     <ion-list>
       <button ion-item *ngFor="let feature of product.features">
