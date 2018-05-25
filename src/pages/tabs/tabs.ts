@@ -9,7 +9,7 @@ import {FeedPage} from "../feed/feed";
 })
 export class TabsPage {
   tab1Root: any = ProductsPage.name;
-  tab2Root: any = ProductsPage.name;
+  tab2Root: any = null;
   tab3Root: any = FeedPage.name;
   mySelectedIndex: number;
 

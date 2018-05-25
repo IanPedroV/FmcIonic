@@ -12,7 +12,7 @@ export class MyApp {
   rootPage: any = TabsPage;
 
   public paginas = [
-    {titulo: 'Loja', componente: ProductsPage.name, icone: 'cash'},
+    {titulo: 'Loja', componente: TabsPage, icone: 'cash'},
     {titulo: 'Configurações', componente: ProductsPage.name, icone: 'settings'}
   ];
 

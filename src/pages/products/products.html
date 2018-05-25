@@ -13,25 +13,26 @@
   </ion-navbar>
 
   <ion-toolbar>
+    <!--<ion-segment [(ngModel)]="category" color="warning">-->
+    <!--<ion-segment-button *ngFor="let category of categoryList" value={{category.name}}>-->
+    <!--{{category.name}}-->
+    <!--</ion-segment-button>-->
+    <!--</ion-segment>-->
+
     <ion-segment [(ngModel)]="category" color="warning">
-      <ion-segment-button value="VIPS">
-        VIPS
-      </ion-segment-button>
-      <ion-segment-button value="PASSES">
-        PASSES DE BAT.
-      </ion-segment-button>
-      <ion-segment-button value="CAIXAS">
-        CAIXAS MIST.
+      <ion-segment-button *ngFor="let category of categoryList" value="{{category.name}}">
+        {{category.name}}
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
   <div [ngSwitch]="category">
     <ng-container *ngFor="let category of categoryList">
       <ion-list *ngSwitchCase="category.name">
-        <ion-item (click)="showDetails(product)" *ngFor="let product of productList">
+        <ion-item *ngFor="let product of getProducts(category)" (click)="showDetails(product)">
           <ion-thumbnail item-start><img src={{product.image}}></ion-thumbnail>
           <h2>{{product.name}}</h2>
           <p>{{product.description}}</p>
