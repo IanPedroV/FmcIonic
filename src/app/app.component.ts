@@ -1,19 +1,22 @@
-import {Component} from '@angular/core';
-import {Platform} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {NavController, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {TabsPage} from "../pages/tabs/tabs";
-import {ProductsPage} from "../pages/products/products";
+import {LoginPage} from "../pages/login/login";
+import {FeedPage} from "../pages/feed/feed";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+  @ViewChild('conteudo') nav: NavController;
   rootPage: any = TabsPage;
+  logado = false;
 
-  public paginas = [
-    {titulo: 'Loja', componente: TabsPage, icone: 'cash'},
-    {titulo: 'Configurações', componente: ProductsPage.name, icone: 'settings'}
+  public pageList = [
+    {title: 'Login', component: LoginPage.name},
+    {title: 'Cadastro', component: FeedPage.name}
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
@@ -21,5 +24,10 @@ export class MyApp {
       splashScreen.hide();
       statusBar.hide();
     });
+  }
+
+  public goToPage(component) {
+    console.log('Chamando goToPage() para abrir: ' + component);
+    this.nav.push(component);
   }
 }
