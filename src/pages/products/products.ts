@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {IonicPage, Modal, ModalController} from 'ionic-angular';
-import {ModalPage} from "../modal/modal";
 import {Product} from "../../models/product";
 import {Category} from "../../models/category";
+import {ProductDetailsPage} from "../product-details/product-details";
 
 @IonicPage()
 @Component({
@@ -82,7 +82,7 @@ export class ProductsPage {
   }
 
   showDetails(product: Product) {
-    let myModal: Modal = this.modal.create(ModalPage.name, product);
+    let myModal: Modal = this.modal.create(ProductDetailsPage.name, product);
     myModal.present();
   }
 
