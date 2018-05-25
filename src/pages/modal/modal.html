@@ -1,7 +1,8 @@
 <ion-header>
   <ion-navbar color="warning">
     <div class="titleicon">
-      <img src="https://gallery.mailchimp.com/cc1505233db775a46edcf7259/images/a0fd24ee-e4ff-4916-92f2-f675891f21f3.png" width="100px" />
+      <img src="https://gallery.mailchimp.com/cc1505233db775a46edcf7259/images/a0fd24ee-e4ff-4916-92f2-f675891f21f3.png"
+           width="100px"/>
     </div>
     <ion-buttons end>
       <button ion-button icon-only (click)="closeModal()">
@@ -12,9 +13,57 @@
   </ion-navbar>
 </ion-header>
 
-
-
-
 <ion-content padding>
+  <div text-center><img src={{product.image}} style="width: 200px; height: 200px;border-left-width: 10px"></div>
+  <hr style="height: 3px; color: black">
+  <ion-card>
+    <ion-card-header>
+      {{product.name}}
+    </ion-card-header>
+    <ion-list>
+      <button ion-item>
+        <ion-icon name="checkmark-circle" color="warning" item-start></ion-icon>
+        5 caixas misteriosas
+      </button>
+      <button ion-item>
+        <ion-icon name="checkmark-circle" color="warning" item-start></ion-icon>
+        Slot Reservado
+      </button>
+      <button ion-item>
+        <ion-icon name="checkmark-circle" color="warning" item-start></ion-icon>
+        15 Efeitos
+      </button>
+      <button ion-item>
+        <ion-icon name="checkmark-circle" color="warning" item-start></ion-icon>
+        10 cores de chat
+      </button>
+      <button ion-item>
+        <ion-icon name="checkmark-circle" color="warning" item-start></ion-icon>
+        5000 moedas
+      </button>
+      <button ion-item>
+        <ion-icon name="checkmark-circle" color="warning" item-start></ion-icon>
+        10000 XP
+      </button>
+    </ion-list>
+  </ion-card>
+  <!--<ion-grid>-->
+    <!--<ion-row>-->
+      <!--<ion-col col-8>-->
+        <!--<h1>{{product.name}}</h1>-->
+      <!--</ion-col>-->
+      <!--<ion-col>-->
+        <!--<h2 item-right>R$ {{product.price}}</h2>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</ion-grid>-->
+
+
+
+  <ion-fab right bottom>
+    <button ion-fab color="warning">
+      <ion-icon name="cart"></ion-icon>
+    </button>
+  </ion-fab>
 
 </ion-content>

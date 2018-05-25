@@ -75,7 +75,7 @@ export class ProductsPage {
   }
 
   showDetails(product: Product) {
-    let myModal: Modal = this.modal.create(ModalPage.name, {name: product.name});
+    let myModal: Modal = this.modal.create(ModalPage.name, product);
     myModal.present();
   }
 
