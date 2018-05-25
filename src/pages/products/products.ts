@@ -26,6 +26,7 @@ export class ProductsPage {
         name: 'VIP Lendário',
         category: this.categoryList[0],
         description: 'Teste',
+        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 10,
         image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/2371470d77ce816fef4f21ec773ab0836f6d874d.png'
       },
@@ -33,6 +34,7 @@ export class ProductsPage {
         name: 'VIP Epico',
         category: this.categoryList[0],
         description: 'Teste',
+        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 20,
         image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/d2a73e55ba219acd84d9add82f64055c1bc21b04.png'
       },
@@ -40,6 +42,7 @@ export class ProductsPage {
         name: 'VIP',
         category: this.categoryList[0],
         description: 'Teste',
+        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 30,
         image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/3c34b569fddd386b8c6b7283df8e34eaabc704a2.png'
       },
@@ -47,6 +50,7 @@ export class ProductsPage {
         name: 'Kit Refletz',
         category: this.categoryList[1],
         description: 'Teste',
+        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 30,
         image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/2670dd47b99146ce668c11ce774ff0d405b4ef59.png'
       },
@@ -54,6 +58,7 @@ export class ProductsPage {
         name: 'Kit Baixa',
         category: this.categoryList[1],
         description: 'Teste',
+        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 30,
         image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/a60c777edace2a14a3be41fd99af974adfc4f001.png'
       },
@@ -61,6 +66,7 @@ export class ProductsPage {
         name: 'Kit Jazz',
         category: this.categoryList[2],
         description: 'Teste',
+        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 30,
         image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/a60c777edace2a14a3be41fd99af974adfc4f001.png'
       },
@@ -68,6 +74,7 @@ export class ProductsPage {
         name: 'Kit Spok',
         category: this.categoryList[2],
         description: 'Teste',
+        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 30,
         image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/a60c777edace2a14a3be41fd99af974adfc4f001.png'
       }
@@ -77,14 +84,6 @@ export class ProductsPage {
   showDetails(product: Product) {
     let myModal: Modal = this.modal.create(ModalPage.name, product);
     myModal.present();
-  }
-
-  isVIPS(category: Category) {
-    return category.name === 'VIPS';
-  }
-
-  showMessage(message: string) {
-    console.log(message)
   }
 
   getProducts(category: Category) {

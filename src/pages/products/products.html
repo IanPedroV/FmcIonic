@@ -13,12 +13,6 @@
   </ion-navbar>
 
   <ion-toolbar>
-    <!--<ion-segment [(ngModel)]="category" color="warning">-->
-    <!--<ion-segment-button *ngFor="let category of categoryList" value={{category.name}}>-->
-    <!--{{category.name}}-->
-    <!--</ion-segment-button>-->
-    <!--</ion-segment>-->
-
     <ion-segment [(ngModel)]="category" color="warning">
       <ion-segment-button *ngFor="let category of categoryList" value="{{category.name}}">
         {{category.name}}
@@ -26,7 +20,6 @@
     </ion-segment>
   </ion-toolbar>
 </ion-header>
-
 
 <ion-content>
   <div [ngSwitch]="category">
