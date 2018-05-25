@@ -15,8 +15,8 @@ export class MyApp {
   logado = false;
 
   public pageList = [
-    {title: 'Login', component: LoginPage.name},
-    {title: 'Cadastro', component: FeedPage.name}
+    {title: 'Login', component: LoginPage.name, icon: 'contact'},
+    {title: 'Cadastro', component: FeedPage.name, icon: 'clipboard'}
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
