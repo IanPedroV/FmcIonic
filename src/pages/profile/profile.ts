@@ -1,12 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, ToastController, ViewController} from 'ionic-angular';
+import {Product} from "../../models/product";
 
 @IonicPage()
 @Component({
@@ -14,12 +8,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
+  public product: Product;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private toastCtrl: ToastController, private viewController: ViewController, public navCtrl: NavController, public navParams: NavParams) {
+    this.product = viewController.data;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+  showToast(message: string, closeButton: string) {
+    const toast = this.toastCtrl.create({
+      message: message,
+      duration: 5000,
+      showCloseButton: true,
+      closeButtonText: closeButton,
+    });
+    toast.present();
   }
 
+  closeModal() {
+    this.viewController.dismiss(this.viewController.data);
+  }
 }

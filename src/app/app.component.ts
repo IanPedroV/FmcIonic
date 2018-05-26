@@ -5,6 +5,7 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {TabsPage} from "../pages/tabs/tabs";
 import {LoginPage} from "../pages/login/login";
 import {RegisterPage} from "../pages/register/register";
+import {ProfilePage} from "../pages/profile/profile";
 
 @Component({
   templateUrl: 'app.html'
@@ -17,7 +18,7 @@ export class MyApp {
   public pageList = [
     {title: 'Login', component: LoginPage.name, icon: 'lock'},
     {title: 'Registro', component: RegisterPage.name, icon: 'clipboard'},
-    {title: 'Perfil', component: LoginPage.name, icon: 'contact'}
+    {title: 'Perfil', component: ProfilePage.name, icon: 'contact'}
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {

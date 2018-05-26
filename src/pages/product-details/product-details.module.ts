@@ -9,9 +9,6 @@ import {ProductDetailsPage} from './product-details';
   imports: [
     IonicPageModule.forChild(ProductDetailsPage),
   ],
-  exports: [
-    ProductDetailsPage
-  ]
 })
 export class ProductDetailsPageModule {
 }

@@ -1,18 +1,70 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>ProfilePage</ion-title>
+  <ion-navbar color="warning">
+    <div class="titleicon">
+      <img src="https://gallery.mailchimp.com/cc1505233db775a46edcf7259/images/a0fd24ee-e4ff-4916-92f2-f675891f21f3.png"
+           width="100px"/>
+    </div>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title></ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
+  <ion-item>
+    <div class="avatar-wrapper">
+      <ion-avatar>
+        <img src="https://www.drupal.org/files/issues/default-avatar.png">
+      </ion-avatar>
+
+      <button class="btn-tirar-foto" ion-button icon-only round color="warning">
+        <ion-icon name="build"></ion-icon>
+      </button>
+    </div>
+  </ion-item>
+  <ion-item>
+    Histórico de compras
+  </ion-item>
+  <ion-card>
+    <ion-card-header>
+      Informações do usuário:
+    </ion-card-header>
+    <ion-list inset>
+
+      <ion-item>
+        <ion-label>E-mail:</ion-label>
+        <ion-input type="text" value="user@user.com"></ion-input>
+        <button ion-button clear color="secondary" type="button" item-right>
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Senha:</ion-label>
+        <ion-input type="password" value="1234567"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Nick no PC:</ion-label>
+        <ion-input type="text" value="user"></ion-input>
+        <button ion-button clear color="secondary" type="button" item-right>
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item>
+        <ion-label>Nick no Pocket:</ion-label>
+        <ion-input type="text" value="user"></ion-input>
+        <button ion-button clear color="danger" type="button" item-right
+                (click)="showToast('Nick ainda não verificado','Verificar')">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
+    <ion-item text-center>
+      <button ion-button color="warning" disabled>Salvar Informações</button>
+    </ion-item>
+  </ion-card>
 
 </ion-content>
