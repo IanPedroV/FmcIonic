@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {NavParams} from 'ionic-angular';
 import {ProductsPage} from "../products/products";
 import {FeedPage} from "../feed/feed";
-import {LoginPage} from "../login/login";
+import {MysteryCardsPage} from "../mystery-cards/mystery-cards";
 
 @Component({
   selector: 'page-tabs',
@@ -10,7 +10,7 @@ import {LoginPage} from "../login/login";
 })
 export class TabsPage {
   tab1Root: any = ProductsPage.name;
-  tab2Root: any = LoginPage.name;
+  tab2Root: any = MysteryCardsPage.name;
   tab3Root: any = FeedPage.name;
   mySelectedIndex: number;
 
