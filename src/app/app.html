@@ -9,16 +9,15 @@
       </ion-item>
       <ion-list>
         <button ion-item menuClose *ngFor="let page of pageList" (click)="goToPage(page.component)">
-          <ion-icon [name]="page.icon" item-left></ion-icon>
+          <ion-icon [name]="page.icon" item-left color="warning"></ion-icon>
           {{ page.title }}
         </button>
       </ion-list>
     </ion-content>
-    <ion-footer class="bar-stable">
-      <button ion-item menuClose>
-        <ion-icon name="settings" item-left></ion-icon>
-        Configurações
-      </button>
+    <ion-footer>
+      <ion-toolbar text-center>
+          <div class="copyright-message">© FamiliaCraft 2017-2018. Todos os diretos reservados.</div>
+      </ion-toolbar>
     </ion-footer>
   </ion-menu>
   <ion-nav [root]="rootPage" main #conteudo></ion-nav>

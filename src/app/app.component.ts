@@ -4,7 +4,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {TabsPage} from "../pages/tabs/tabs";
 import {LoginPage} from "../pages/login/login";
-import {FeedPage} from "../pages/feed/feed";
+import {RegisterPage} from "../pages/register/register";
 
 @Component({
   templateUrl: 'app.html'
@@ -16,7 +16,7 @@ export class MyApp {
 
   public pageList = [
     {title: 'Login', component: LoginPage.name, icon: 'contact'},
-    {title: 'Cadastro', component: FeedPage.name, icon: 'clipboard'}
+    {title: 'Registro', component: RegisterPage.name, icon: 'clipboard'}
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
