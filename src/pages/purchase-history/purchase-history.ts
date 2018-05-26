@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, Modal, ModalController, ViewController} from 'ionic-angular';
+import {MyApp} from "../../app/app.component";
+import {PurchaseDetailsPage} from "../purchase-details/purchase-details";
+import {Purchase} from "../../models/purchase";
 
 /**
  * Generated class for the PurchaseHistoryPage page.
@@ -15,10 +18,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PurchaseHistoryPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private modal: ModalController, private viewController: ViewController) {
   }
 
-  showProductDetails(item: any) {
+  showProductDetails(purchase: Purchase) {
+    let myModal: Modal = this.modal.create(PurchaseDetailsPage.name, purchase);
+    myModal.present();
+  }
 
+  getPurchasedProducts() {
+    return MyApp.user.purchaseList;
+  }
+
+  closeModal() {
+    this.viewController.dismiss(this.viewController.data);
   }
 }

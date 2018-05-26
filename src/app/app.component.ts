@@ -15,13 +15,15 @@ import {ProductsPage} from "../pages/products/products";
 export class MyApp {
   @ViewChild('conteudo') nav: NavController;
   rootPage: any = TabsPage;
-  user: User = {
+  static user: User = {
     email: 'user@user.com',
     password: '123456',
+    avatar: 'https://www.drupal.org/files/issues/default-avatar.png',
     pocketNick: 'user',
     pcNick: 'user',
-    verifiedPocketNick: false,
-    verifiedPcNick: false,
+    isEmailVerified: false,
+    isPocketNickVerified: false,
+    isPcNickVerified: false,
     purchaseList: [{
       date: '01/05/1998',
       paymentMethod: 'Google Pay',

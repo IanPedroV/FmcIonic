@@ -15,14 +15,8 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item (click)="showProductDetails(item)">
-      Vip Lendário
-    </button>
-    <button ion-item (click)="showProductDetails(item)">
-      Passe de Janeiro
-    </button>
-    <button ion-item (click)="showProductDetails(item)">
-      1 Caixa Misteriosa
+    <button ion-item *ngFor="let purchase of getPurchasedProducts()" (click)="showProductDetails(purchase)">
+      {{purchase.product.name}}
     </button>
   </ion-list>
 </ion-content>

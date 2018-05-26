@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {IonicPage, Modal, ModalController, ToastController, ViewController} from 'ionic-angular';
 import {Product} from "../../models/product";
 import {PurchaseHistoryPage} from "../purchase-history/purchase-history";
+import {MyApp} from "../../app/app.component";
 
 @IonicPage()
 @Component({
@@ -32,5 +33,9 @@ export class ProfilePage {
 
   closeModal() {
     this.viewController.dismiss(this.viewController.data);
+  }
+
+  getLoggedUser(){
+    return MyApp.user;
   }
 }

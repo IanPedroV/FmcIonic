@@ -1,12 +1,6 @@
 import {Component} from '@angular/core';
 import {IonicPage, ViewController} from 'ionic-angular';
-
-/**
- * Generated class for the PurchaseDetailsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {Purchase} from "../../models/purchase";
 
 @IonicPage()
 @Component({
@@ -14,12 +8,15 @@ import {IonicPage, ViewController} from 'ionic-angular';
   templateUrl: 'purchase-details.html',
 })
 export class PurchaseDetailsPage {
+  purchase: Purchase;
 
   constructor(private viewController: ViewController) {
+    this.purchase = viewController.data;
   }
 
   closeModal() {
     this.viewController.dismiss(this.viewController.data);
   }
+
 
 }

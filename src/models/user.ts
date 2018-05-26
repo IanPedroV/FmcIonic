@@ -3,9 +3,11 @@ import {Purchase} from "./purchase";
 export interface User {
   email: string,
   password: string,
+  avatar: string,
   pocketNick: string,
   pcNick: string,
-  verifiedPocketNick: boolean,
-  verifiedPcNick: boolean,
+  isEmailVerified: boolean,
+  isPocketNickVerified: boolean,
+  isPcNickVerified: boolean,
   purchaseList: Purchase[];
 }
