@@ -14,7 +14,7 @@ import {ProductsPage} from "../pages/products/products";
 })
 export class MyApp {
   @ViewChild('conteudo') nav: NavController;
-  logado: boolean = false;
+  logado: boolean = true;
   rootPage: any = TabsPage;
   static user: User = {
     email: 'user@user.com',
