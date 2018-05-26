@@ -9,5 +9,6 @@ import { PurchaseHistoryPage } from './purchase-history';
   imports: [
     IonicPageModule.forChild(PurchaseHistoryPage),
   ],
+
 })
 export class PurchaseHistoryPageModule {}

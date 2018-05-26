@@ -25,9 +25,15 @@
       </button>
     </div>
   </ion-item>
-  <ion-item>
-    Histórico de compras
-  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col>
+        <button ion-button outline color="warning" (click)="showPurchaseHistory('oi')">Histórico de compras</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-card>
     <ion-card-header>
       Informações do usuário:

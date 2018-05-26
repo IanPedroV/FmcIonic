@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController, ViewController} from 'ionic-angular';
+import {IonicPage, Modal, ModalController, ToastController, ViewController} from 'ionic-angular';
 import {Product} from "../../models/product";
+import {PurchaseHistoryPage} from "../purchase-history/purchase-history";
 
 @IonicPage()
 @Component({
@@ -10,7 +11,7 @@ import {Product} from "../../models/product";
 export class ProfilePage {
   public product: Product;
 
-  constructor(private toastCtrl: ToastController, private viewController: ViewController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private toastCtrl: ToastController, private viewController: ViewController, private modal: ModalController) {
     this.product = viewController.data;
   }
 
@@ -22,6 +23,11 @@ export class ProfilePage {
       closeButtonText: closeButton,
     });
     toast.present();
+  }
+
+  showPurchaseHistory(user) {
+    let myModal: Modal = this.modal.create(PurchaseHistoryPage.name);
+    myModal.present();
   }
 
   closeModal() {
