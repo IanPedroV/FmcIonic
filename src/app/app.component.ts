@@ -14,6 +14,7 @@ import {ProductsPage} from "../pages/products/products";
 })
 export class MyApp {
   @ViewChild('conteudo') nav: NavController;
+  logado: boolean = false;
   rootPage: any = TabsPage;
   static user: User = {
     email: 'user@user.com',
@@ -63,9 +64,9 @@ export class MyApp {
   };
 
   public pageList = [
-    {title: 'Login', component: LoginPage.name, icon: 'lock'},
-    {title: 'Registro', component: RegisterPage.name, icon: 'clipboard'},
-    {title: 'Perfil', component: ProfilePage.name, icon: 'contact'}
+    {title: 'Login', component: LoginPage.name, icon: 'lock', showWhenLogged: false},
+    {title: 'Registro', component: RegisterPage.name, icon: 'clipboard', showWhenLogged: false},
+    {title: 'Perfil', component: ProfilePage.name, icon: 'contact', showWhenLogged: true}
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
@@ -78,5 +79,13 @@ export class MyApp {
   public goToPage(component) {
     console.log('Chamando goToPage() para abrir: ' + component);
     this.nav.push(component);
+  }
+
+  getUser() {
+    return MyApp.user;
+  }
+
+  getFilteredPages(showWhenLogged: boolean) {
+    return this.pageList.filter(page => page.showWhenLogged === showWhenLogged);
   }
 }

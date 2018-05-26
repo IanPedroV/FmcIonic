@@ -1,22 +1,39 @@
 <ion-nav #myNav [root]="rootPage"></ion-nav>
 <ion-split-pane>
-  <ion-menu [content]="conteudo">
-    <ion-content>
-      <ion-item id="cabecalho-menu" class="cabecalho-menu">
-        <ion-avatar item-start><img src="https://minotar.net/helm/Steve.png"></ion-avatar>
-        <h2>Visitante</h2>
-        <p *ngIf="logado">logado.email</p>
+  <ion-menu [content]="conteudo" id="cabecalho-menu">
+    <ion-content *ngIf="logado; else loggedContent">
+      <ion-item class="cabecalho-menu">
+        <ion-avatar item-start><img [src]="getUser().avatar"></ion-avatar>
+        <h2>{{getUser().pocketNick}}</h2>
+        <h2>{{getUser().email}}</h2>
       </ion-item>
       <ion-list>
-        <button ion-item menuClose *ngFor="let page of pageList" (click)="goToPage(page.component)">
+        <button ion-item menuClose *ngFor="let page of getFilteredPages(true)" (click)="goToPage(page.component)">
           <ion-icon [name]="page.icon" item-left color="warning"></ion-icon>
           {{ page.title }}
         </button>
       </ion-list>
     </ion-content>
+
+    <ng-template #loggedContent>
+      <ion-content>
+        <ion-item class="cabecalho-menu">
+          <ion-avatar item-start><img src="https://minotar.net/helm/Steve.png"></ion-avatar>
+          <h2>Visitante</h2>
+        </ion-item>
+        <ion-list>
+          <button ion-item menuClose *ngFor="let page of getFilteredPages(false)" (click)="goToPage(page.component)">
+            <ion-icon [name]="page.icon" item-left color="warning"></ion-icon>
+            {{ page.title }}
+          </button>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+
+
     <ion-footer>
       <ion-toolbar text-center>
-          <div class="copyright-message">© FamiliaCraft 2017-2018. Todos os diretos reservados.</div>
+        <div class="copyright-message">© FamiliaCraft 2017-2018. Todos os diretos reservados.</div>
       </ion-toolbar>
     </ion-footer>
   </ion-menu>
