@@ -12,19 +12,18 @@ import {ProductDetailsPage} from "../product-details/product-details";
 export class ProductsPage {
   category: string = 'Vips';
   productList: Array<Product> = [];
-  categoryList: Array<Category> = [];
+  static categoryList: Array<Category> = [
+    {name: 'Vips', description: 'Teste'},
+    {name: 'Passes', description: 'Teste'},
+    {name: 'Caixas', description: 'Teste'},
+  ];
 
   constructor(private modal: ModalController) {
-    this.categoryList = [
-      {name: 'Vips', description: 'Teste'},
-      {name: 'Passes', description: 'Teste'},
-      {name: 'Caixas', description: 'Teste'},
-    ];
 
-    this.productList = [
+    this.productList = this.productList = [
       {
         name: 'VIP Lendário',
-        category: this.categoryList[0],
+        category: ProductsPage.categoryList[0],
         description: 'Teste',
         features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 10,
@@ -32,7 +31,7 @@ export class ProductsPage {
       },
       {
         name: 'VIP Epico',
-        category: this.categoryList[0],
+        category: ProductsPage.categoryList[0],
         description: 'Teste',
         features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 20,
@@ -40,7 +39,7 @@ export class ProductsPage {
       },
       {
         name: 'VIP',
-        category: this.categoryList[0],
+        category: ProductsPage.categoryList[0],
         description: 'Teste',
         features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 30,
@@ -48,7 +47,7 @@ export class ProductsPage {
       },
       {
         name: 'Kit Refletz',
-        category: this.categoryList[1],
+        category: ProductsPage.categoryList[1],
         description: 'Teste',
         features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 30,
@@ -56,7 +55,7 @@ export class ProductsPage {
       },
       {
         name: 'Kit Baixa',
-        category: this.categoryList[1],
+        category: ProductsPage.categoryList[1],
         description: 'Teste',
         features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 30,
@@ -64,7 +63,7 @@ export class ProductsPage {
       },
       {
         name: 'Kit Jazz',
-        category: this.categoryList[2],
+        category: ProductsPage.categoryList[2],
         description: 'Teste',
         features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 30,
@@ -72,7 +71,7 @@ export class ProductsPage {
       },
       {
         name: 'Kit Spok',
-        category: this.categoryList[2],
+        category: ProductsPage.categoryList[2],
         description: 'Teste',
         features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
         price: 30,
@@ -88,6 +87,10 @@ export class ProductsPage {
 
   getProducts(category: Category) {
     return this.productList.filter(product => product.category === category);
+  }
+
+  getCategories(){
+    return ProductsPage.categoryList;
   }
 
 
