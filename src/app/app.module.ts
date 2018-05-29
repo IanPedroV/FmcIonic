@@ -5,7 +5,6 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
 import {MyApp} from './app.component';
 import {TabsPage} from '../pages/tabs/tabs';
-import {ProdutosServiceProvider} from '../providers/produtos-service/produtos-service';
 import {ProductsServiceProvider} from '../providers/products-service/products-service';
 
 @NgModule({
