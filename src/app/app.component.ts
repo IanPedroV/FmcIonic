@@ -13,7 +13,7 @@ import {User} from "../models/user";
 })
 export class MyApp {
   @ViewChild('conteudo') nav: NavController;
-  logado: boolean = true;
+  logado: boolean = false;
   rootPage: any = TabsPage;
   static user: User = {
     email: 'user@user.com',

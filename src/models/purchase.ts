@@ -4,5 +4,6 @@ export interface Purchase {
   date: string,
   paymentMethod: string,
   product: Product;
+  status: string;
 
 }
