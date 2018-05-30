@@ -9,9 +9,9 @@ import {MysteryCardsPage} from "../mystery-cards/mystery-cards";
   templateUrl: 'tabs.html',
 })
 export class TabsPage {
-  tab1Root: any = FeedPage.name;
+  tab1Root: any = ProductsPage.name;
   tab2Root: any = MysteryCardsPage.name;
-  tab3Root: any = ProductsPage.name;
+  tab3Root: any = FeedPage.name;
   mySelectedIndex: number;
 
   constructor(navParams: NavParams) {

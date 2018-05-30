@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
-import {IonicPage, Modal, ModalController} from 'ionic-angular';
+import {IonicPage, LoadingController, Modal, ModalController} from 'ionic-angular';
 import {Product} from "../../models/product";
 import {Category} from "../../models/category";
 import {ProductDetailsPage} from "../product-details/product-details";
+import {ProductsServiceProvider} from "../../providers/products-service/products-service";
+import {CategoriesServiceProvider} from "../../providers/categories-service/categories-service";
 
 @IonicPage()
 @Component({
@@ -12,86 +14,44 @@ import {ProductDetailsPage} from "../product-details/product-details";
 export class ProductsPage {
   category: string = 'Vips';
   productList: Array<Product> = [];
-  static categoryList: Array<Category> = [
-    {name: 'Vips', description: 'Teste'},
-    {name: 'Passes', description: 'Teste'},
-    {name: 'Caixas', description: 'Teste'},
-  ];
+  categoryList: Array<Category> =
+    [
+      {id: 1, name: 'Vips', description: 'Teste'},
+      {id: 2, name: 'Passes', description: 'Teste'},
+      {id: 3, name: 'Caixas', description: 'Teste'},
+    ];
 
-  constructor(private modal: ModalController) {
+  constructor(private _modal: ModalController, private _loadingCtrl: LoadingController,
+              private _productsService: ProductsServiceProvider, private _categoryService: CategoriesServiceProvider) {
+  }
 
-    this.productList = this.productList = [
-      {
-        name: 'VIP Lendário',
-        category: ProductsPage.categoryList[0],
-        description: 'Teste',
-        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
-        price: 10,
-        image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/2371470d77ce816fef4f21ec773ab0836f6d874d.png'
-      },
-      {
-        name: 'VIP Epico',
-        category: ProductsPage.categoryList[0],
-        description: 'Teste',
-        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
-        price: 20,
-        image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/d2a73e55ba219acd84d9add82f64055c1bc21b04.png'
-      },
-      {
-        name: 'VIP',
-        category: ProductsPage.categoryList[0],
-        description: 'Teste',
-        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
-        price: 30,
-        image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/3c34b569fddd386b8c6b7283df8e34eaabc704a2.png'
-      },
-      {
-        name: 'Kit Refletz',
-        category: ProductsPage.categoryList[1],
-        description: 'Teste',
-        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
-        price: 30,
-        image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/2670dd47b99146ce668c11ce774ff0d405b4ef59.png'
-      },
-      {
-        name: 'Kit Baixa',
-        category: ProductsPage.categoryList[1],
-        description: 'Teste',
-        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
-        price: 30,
-        image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/a60c777edace2a14a3be41fd99af974adfc4f001.png'
-      },
-      {
-        name: 'Kit Jazz',
-        category: ProductsPage.categoryList[2],
-        description: 'Teste',
-        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
-        price: 30,
-        image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/a60c777edace2a14a3be41fd99af974adfc4f001.png'
-      },
-      {
-        name: 'Kit Spok',
-        category: ProductsPage.categoryList[2],
-        description: 'Teste',
-        features: ['5 caixas misteriosas', 'Slot Reservado','15 Efeitos','10 cores de chat','5000 moedas','10000 XP'],
-        price: 30,
-        image: 'https://dunb17ur4ymx4.cloudfront.net/packages/images/a60c777edace2a14a3be41fd99af974adfc4f001.png'
-      }
-    ]
+
+  ionViewDidLoad() {
+    // this._categoryService.list().subscribe((categories) => {
+    //   console.log('categorias carregadas!');
+    //   this.categoryList = categories;
+    // }, error => console.log(error));
+
+    let loading = this._loadingCtrl.create({content: 'Carregando produtos...'});
+    loading.present();
+    this._productsService.list().subscribe((products) => {
+      products.map(product => {
+        product.category = this.categoryList.find(category =>
+          category.id === product.category_id);
+        product.features = product.features.split(',')
+      });
+      this.productList = products;
+      console.log(this.productList);
+      loading.dismiss();
+    }, error => console.log(error));
   }
 
   showDetails(product: Product) {
-    let myModal: Modal = this.modal.create(ProductDetailsPage.name, product);
+    let myModal: Modal = this._modal.create(ProductDetailsPage.name, product);
     myModal.present();
   }
 
   getProducts(category: Category) {
     return this.productList.filter(product => product.category === category);
   }
-
-  getCategories(){
-    return ProductsPage.categoryList;
-  }
-
-
 }
