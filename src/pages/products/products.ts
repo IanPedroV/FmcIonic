@@ -5,7 +5,8 @@ import {Category} from "../../models/category";
 import {ProductDetailsPage} from "../product-details/product-details";
 import {ProductsServiceProvider} from "../../providers/products-service/products-service";
 import {CategoriesServiceProvider} from "../../providers/categories-service/categories-service";
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
+
 
 @IonicPage()
 @Component({
@@ -16,11 +17,11 @@ export class ProductsPage {
   category: string = 'Vips';
   productList: Array<Product> = [];
   categoryList: Array<Category> = [];
-    // [
-    //   {id: 1, name: 'Vips', description: 'Teste'},
-    //   {id: 2, name: 'Passes', description: 'Teste'},
-    //   {id: 3, name: 'Caixas', description: 'Teste'},
-    // ];
+  // [
+  //   {id: 1, name: 'Vips', description: 'Teste'},
+  //   {id: 2, name: 'Passes', description: 'Teste'},
+  //   {id: 3, name: 'Caixas', description: 'Teste'},
+  // ];
 
   constructor(private _modal: ModalController, private _loadingCtrl: LoadingController,
               private _productsService: ProductsServiceProvider, private _categoryService: CategoriesServiceProvider) {
@@ -28,19 +29,13 @@ export class ProductsPage {
 
 
   ionViewDidLoad() {
-
-    this._categoryService.list().subscribe((categories) => {
-      console.log('categorias carregadas!');
-      this.categoryList = categories;
-    }, error => console.log(error));
-
-    let loading = this._loadingCtrl.create({content: 'Carregando produtos...'});
-    loading.present();
-    this._productsService.list().subscribe((products) => {
-      this.assignCatetories(products);
-      this.productList = products;
-      loading.dismiss();
-    }, error => console.log(error));
+    Observable.forkJoin([this._categoryService.list(), this._productsService.list()]).subscribe(results => {
+      this.categoryList = results[0];
+      this.productList = results[1];
+      this.assignCatetories(this.productList);
+      console.log(this.categoryList);
+      console.log(this.productList);
+    });
   }
 
   private assignCatetories(products) {
