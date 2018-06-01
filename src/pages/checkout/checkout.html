@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar color="warning">
+    <div class="titleicon">
+      <img src="https://gallery.mailchimp.com/cc1505233db775a46edcf7259/images/a0fd24ee-e4ff-4916-92f2-f675891f21f3.png"
+           width="100px"/>
+    </div>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <h1 text-center>Resumo da compra:</h1>
+  </ion-item>
+
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-9>
+          {{_product.name}}
+        </ion-col>
+        <ion-col col-3>
+          R${{_product.price}}.00
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+<ion-footer no-shadow>
+  <ion-toolbar position="bottom">
+    <button ion-button full disabled>Continuar</button>
+  </ion-toolbar>
+</ion-footer>

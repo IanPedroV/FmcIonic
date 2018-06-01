@@ -8,7 +8,7 @@ export class ProductsServiceProvider {
   }
 
   list() {
-    return this._http.get<any[]>('http://localhost:3000/produtos');
+    return this._http.get<any[]>('http://192.168.15.13:3000/produtos');
   }
 
 }

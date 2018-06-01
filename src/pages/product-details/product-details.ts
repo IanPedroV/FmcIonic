@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavParams, ViewController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {Product} from "../../models/product";
+
 @IonicPage()
 @Component({
   selector: 'page-product-details',
@@ -9,7 +10,7 @@ import {Product} from "../../models/product";
 export class ProductDetailsPage {
   public product: Product;
 
-  constructor(private viewController: ViewController, public navParams: NavParams) {
+  constructor(private viewController: ViewController, private nav: NavController) {
     this.product = viewController.data;
   }
 
@@ -17,4 +18,7 @@ export class ProductDetailsPage {
     this.viewController.dismiss(this.viewController.data);
   }
 
+  checkout(product: Product) {
+    this.nav.push('CheckoutPage', this.product);
+  }
 }

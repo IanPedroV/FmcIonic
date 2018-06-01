@@ -78,7 +78,6 @@ export class MyApp {
   }
 
   public goToPage(component) {
-    console.log('Chamando goToPage() para abrir: ' + component);
     this.nav.push(component);
   }
 

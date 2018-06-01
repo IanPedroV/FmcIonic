@@ -16,12 +16,12 @@ import {Observable} from 'rxjs/Observable';
 export class ProductsPage {
   category: string = 'Vips';
   productList: Array<Product> = [];
-  categoryList: Array<Category> = [];
-  // [
-  //   {id: 1, name: 'Vips', description: 'Teste'},
-  //   {id: 2, name: 'Passes', description: 'Teste'},
-  //   {id: 3, name: 'Caixas', description: 'Teste'},
-  // ];
+  categoryList: Array<Category> =
+    [
+      {id: 1, name: 'Vips', description: 'Teste'},
+      {id: 2, name: 'Passes', description: 'Teste'},
+      {id: 3, name: 'Caixas', description: 'Teste'},
+    ];
 
   constructor(private _modal: ModalController, private _loadingCtrl: LoadingController,
               private _productsService: ProductsServiceProvider, private _categoryService: CategoriesServiceProvider) {
@@ -29,12 +29,16 @@ export class ProductsPage {
 
 
   ionViewDidLoad() {
+    let loading = this._loadingCtrl.create({content: 'Carregando produtos...'});
+    loading.present();
     Observable.forkJoin([this._categoryService.list(), this._productsService.list()]).subscribe(results => {
-      this.categoryList = results[0];
+      //console.log(this.categoryList);
+      // this.categoryList = results[0];
       this.productList = results[1];
       this.assignCatetories(this.productList);
-      console.log(this.categoryList);
-      console.log(this.productList);
+      //console.log(this.categoryList);
+      //console.log(this.productList);
+      loading.dismiss();
     });
   }
 
