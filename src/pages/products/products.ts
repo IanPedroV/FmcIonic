@@ -5,8 +5,6 @@ import {Category} from "../../models/category";
 import {ProductDetailsPage} from "../product-details/product-details";
 import {ProductsServiceProvider} from "../../providers/products-service/products-service";
 import {CategoriesServiceProvider} from "../../providers/categories-service/categories-service";
-import {Observable} from 'rxjs/Observable';
-
 
 @IonicPage()
 @Component({
@@ -31,14 +29,14 @@ export class ProductsPage {
   ionViewDidLoad() {
     let loading = this._loadingCtrl.create({content: 'Carregando produtos...'});
     loading.present();
-    Observable.forkJoin([this._categoryService.list(), this._productsService.list()]).subscribe(results => {
-      //console.log(this.categoryList);
-      // this.categoryList = results[0];
-      this.productList = results[1];
-      this.assignCatetories(this.productList);
-      //console.log(this.categoryList);
-      //console.log(this.productList);
+    this._categoryService.list()
+      .mergeMap((categories) => {
+        //this.categoryList = categories;
+        return this._productsService.list();
+      }).subscribe(products => {
       loading.dismiss();
+      this.productList = products;
+      this.assignCatetories(this.productList);
     });
   }
 

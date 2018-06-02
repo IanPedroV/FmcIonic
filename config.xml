@@ -85,8 +85,8 @@
     <plugin name="cordova-plugin-ionic-keyboard" spec="2.0.5" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
-    <engine name="android" spec="7.0.0" />
     <plugin name="cc.fovea.cordova.purchase" spec="^7.1.3">
         <variable name="BILLING_KEY" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkZAQcBKl4ZWKA4Gn2HO7cAF7D0QB4SMtrkzn1D6k3hRLbWN0EiACbs0mhUAjZYoDMLdi+StVIyU8RADEZSI3JPGyBxR5e0cmDJQbA2rqC2tn5EK7lw58hfvXtQbHMaVAbObphvaa10FpB8aNos5zGVSLPSzGvItg69qHfyimMr0QpTOR8KVSaMtu9x1f6P/hchVb7BnS24XcmaAEOuG9k6v9JjlD1oZ9oBP0L7pxPcVVKO8WaBS3bUNcJG0oqzoAJt5TA02C09kR2otl5sM5L812XPhqugne90/W+XidHKaGkRDxoc0Q6izZpeKMpKHx70Lz+XmLa9myna+YqHv/zQIDAQAB" />
     </plugin>
+    <engine name="android" spec="7.0.0" />
 </widget>

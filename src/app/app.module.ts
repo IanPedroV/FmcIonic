@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {ErrorHandler, NgModule} from '@angular/core';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {SplashScreen} from '@ionic-native/splash-screen';
+import { InAppPurchase2 } from '@ionic-native/in-app-purchase-2';
 import {StatusBar} from '@ionic-native/status-bar';
 import {MyApp} from './app.component';
 import {TabsPage} from '../pages/tabs/tabs';
@@ -34,6 +35,7 @@ import 'rxjs/add/observable/forkJoin';
   providers: [
     StatusBar,
     SplashScreen,
+    InAppPurchase2,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProductsServiceProvider,
     CategoriesServiceProvider
