@@ -16,6 +16,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/forkJoin';
+import { IapServiceProvider } from '../providers/iap-service/iap-service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import 'rxjs/add/observable/forkJoin';
     InAppPurchase2,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProductsServiceProvider,
-    CategoriesServiceProvider
+    CategoriesServiceProvider,
+    IapServiceProvider
   ]
 })
 export class AppModule {
