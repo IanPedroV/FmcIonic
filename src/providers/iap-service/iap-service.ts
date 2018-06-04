@@ -24,8 +24,8 @@ export class IapServiceProvider {
 
     var products: any = {};
     products['productId'] = {
-      id: 'productId',
-      alias: "Product Name",
+      id: '1',
+      alias: "1",
       type: store.NON_CONSUMABLE
     };
 
@@ -34,13 +34,13 @@ export class IapServiceProvider {
         console.log(err);
       });
 
-    store.when("yourProductIdorAlias").approved((order) => {
+    store.when("1").approved((order) => {
       // Product has been purchased.
       this.updateProducts();
       order.finish();
     });
 
-    store.when("yourProductIdorAlias").updated((data) => {
+    store.when("1").updated((data) => {
       this.updateProducts();
     });
 
@@ -68,7 +68,7 @@ export class IapServiceProvider {
   initStore() {
     store.verbosity = store.DEBUG;
     store.ready(() => {
-      store.get("yourProductIdorAlias");
+      store.get("1");
       this.updateProducts();
     });
     store.refresh();
@@ -86,9 +86,10 @@ export class IapServiceProvider {
     }
   }
 
-  buyProduct(productId) {
-    store.order(productId).then(() => console.log("Comprando: " + productId));
+  getStore() {
+    return store;
   }
+
 
 
 }

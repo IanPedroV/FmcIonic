@@ -49,7 +49,7 @@ export class ProductsPage {
   }
 
   showDetails(product: Product) {
-    let myModal: Modal = this._modal.create(ProductDetailsPage.name, product);
+    let myModal: Modal = this._modal.create(ProductDetailsPage, product);
     myModal.present();
   }
 

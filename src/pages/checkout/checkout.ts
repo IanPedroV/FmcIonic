@@ -16,6 +16,8 @@ export class CheckoutPage {
   }
 
   buyProduct() {
-    this._store.buyProduct("1");
+    let loading = this._loadingCtrl.create({content: 'Concluindo compra...'});
+    loading.present();
+    this._store.getStore().order("1").then(() => loading.dismiss());
   }
 }

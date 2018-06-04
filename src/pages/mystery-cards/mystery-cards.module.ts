@@ -3,14 +3,15 @@ import {IonicPageModule} from 'ionic-angular';
 import {MysteryCardsPage} from './mystery-cards';
 
 @NgModule({
-  declarations: [
-    MysteryCardsPage,
-  ],
+  // declarations: [
+  //   MysteryCardsPage,
+  // ],
   imports: [
     IonicPageModule.forChild(MysteryCardsPage),
-  ], exports: [
-    MysteryCardsPage
-  ]
+  ],
+  // exports: [
+  //   MysteryCardsPage
+  // ]
 })
 export class MysteryCardsPageModule {
 }
