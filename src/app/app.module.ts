@@ -21,6 +21,7 @@ import {ProductsPage} from "../pages/products/products";
 import {MysteryCardsPage} from "../pages/mystery-cards/mystery-cards";
 import {FeedPage} from "../pages/feed/feed";
 import {ProductDetailsPage} from "../pages/product-details/product-details";
+import { PurchaseServiceProvider } from '../providers/purchase-service/purchase-service';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {ProductDetailsPage} from "../pages/product-details/product-details";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProductsServiceProvider,
     CategoriesServiceProvider,
-    IapServiceProvider
+    IapServiceProvider,
+    PurchaseServiceProvider
   ]
 })
 export class AppModule {

@@ -15,6 +15,7 @@ export class MyApp {
   @ViewChild('conteudo') nav: NavController;
   logado: boolean = false;
   rootPage: any = TabsPage;
+
   static user: User = {
     email: 'user@user.com',
     password: '123456',
@@ -74,6 +75,7 @@ export class MyApp {
     platform.ready().then(() => {
       splashScreen.hide();
       statusBar.hide();
+
     });
   }
 

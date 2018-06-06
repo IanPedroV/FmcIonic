@@ -18,6 +18,6 @@ export class CheckoutPage {
   buyProduct() {
     let loading = this._loadingCtrl.create({content: 'Concluindo compra...'});
     loading.present();
-    this._store.getStore().order("1").then(() => loading.dismiss());
+    IapServiceProvider.getStore().order(this._product.id.toString()).then(() => loading.dismiss());
   }
 }
