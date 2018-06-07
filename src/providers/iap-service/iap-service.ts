@@ -3,6 +3,7 @@ import {Platform} from "ionic-angular";
 import {IAPProduct} from "@ionic-native/in-app-purchase-2";
 import {ProductsServiceProvider} from "../products-service/products-service";
 import {Product} from "../../models/product";
+import {PurchaseServiceProvider} from "../purchase-service/purchase-service";
 
 declare var store: any;
 
@@ -10,9 +11,11 @@ declare var store: any;
 export class IapServiceProvider {
   productArr: Array<IAPProduct> = [];
 
-  constructor(public platform: Platform, private _productsService: ProductsServiceProvider) {
+  constructor(public platform: Platform, private _productsService: ProductsServiceProvider, private _purchaseService:
+    PurchaseServiceProvider) {
     platform.ready().then(() => {
-        if (store) this.initProducts();
+        if (store)
+          this.initProducts();
       }
     )
   }
@@ -24,7 +27,7 @@ export class IapServiceProvider {
       product = {
         id: productFromAPI.id.toString(),
         alias: productFromAPI.id.toString(),
-        type:  "consumable"
+        type: "consumable"
       };
 
       store.when(productFromAPI.id).approved((order) => {

@@ -1,17 +1,30 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Purchase} from "../../models/purchase";
 
-/*
-  Generated class for the PurchaseServiceProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class PurchaseServiceProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello PurchaseServiceProvider Provider');
+  constructor(private _http: HttpClient) {
+
+  }
+
+  list() {
+    return this._http.get<any[]>('http://192.168.15.13:3000/purchases');
+  }
+
+  getPurchase(id: number) {
+    return this._http.get<any[]>('http://192.168.15.13:3000/purchases/purchase');
+
+  }
+
+  createPurchase(purchase: Purchase) {
+    this._http.post('http://192.168.15.13:3000/purchases/purchase', purchase);
+
+  }
+
+  updatePurchase(purchase: Purchase) {
+    this._http.put('http://192.168.15.13:3000/purchases/purchase', purchase);
   }
 
 }
