@@ -13,17 +13,17 @@ export class PurchaseServiceProvider {
     return this._http.get<any[]>('http://192.168.15.13:3000/purchases');
   }
 
-  getPurchase(id: number) {
+  get(id: number) {
     return this._http.get<any[]>('http://192.168.15.13:3000/purchases/purchase');
 
   }
 
-  createPurchase(purchase: Purchase) {
+  create(purchase: Purchase) {
     this._http.post('http://192.168.15.13:3000/purchases/purchase', purchase);
 
   }
 
-  updatePurchase(purchase: Purchase) {
+  update(purchase: Purchase) {
     this._http.put('http://192.168.15.13:3000/purchases/purchase', purchase);
   }
 
