@@ -22,7 +22,7 @@
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
-            <activity android:debuggable="false" />
+            <activity android:debuggable="true" />
         </edit-config>
         <config-file parent="/manifest" target="AndroidManifest.xml">
             <uses-permission android:name="com.android.vending.BILLING" />

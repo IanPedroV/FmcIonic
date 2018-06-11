@@ -21,7 +21,12 @@ import {ProductsPage} from "../pages/products/products";
 import {MysteryCardsPage} from "../pages/mystery-cards/mystery-cards";
 import {FeedPage} from "../pages/feed/feed";
 import {ProductDetailsPage} from "../pages/product-details/product-details";
-import { PurchaseServiceProvider } from '../providers/purchase-service/purchase-service';
+import {PurchaseServiceProvider} from '../providers/purchase-service/purchase-service';
+import {TooltipsModule} from "ionic-tooltips";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {RegisterPage} from "../pages/register/register";
+import {LoginPage} from "../pages/login/login";
+import { UserServiceProvider } from '../providers/user-service/user-service';
 
 @NgModule({
   declarations: [
@@ -30,12 +35,16 @@ import { PurchaseServiceProvider } from '../providers/purchase-service/purchase-
     ProductsPage,
     MysteryCardsPage,
     FeedPage,
-    ProductDetailsPage
+    ProductDetailsPage,
+    RegisterPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
+    BrowserAnimationsModule,
+    TooltipsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -44,7 +53,9 @@ import { PurchaseServiceProvider } from '../providers/purchase-service/purchase-
     ProductsPage,
     MysteryCardsPage,
     FeedPage,
-    ProductDetailsPage
+    ProductDetailsPage,
+    RegisterPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
@@ -54,7 +65,8 @@ import { PurchaseServiceProvider } from '../providers/purchase-service/purchase-
     ProductsServiceProvider,
     CategoriesServiceProvider,
     IapServiceProvider,
-    PurchaseServiceProvider
+    PurchaseServiceProvider,
+    UserServiceProvider
   ]
 })
 export class AppModule {

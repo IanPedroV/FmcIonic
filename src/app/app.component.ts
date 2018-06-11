@@ -66,9 +66,9 @@ export class MyApp {
   };
 
   public pageList = [
-    {title: 'Login', component: LoginPage.name, icon: 'lock', showWhenLogged: false},
-    {title: 'Registro', component: RegisterPage.name, icon: 'clipboard', showWhenLogged: false},
-    {title: 'Perfil', component: ProfilePage.name, icon: 'contact', showWhenLogged: true}
+    {title: 'Login', component: LoginPage, icon: 'lock', showWhenLogged: false},
+    {title: 'Registro', component: RegisterPage, icon: 'clipboard', showWhenLogged: false},
+    {title: 'Perfil', component: ProfilePage, icon: 'contact', showWhenLogged: true}
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
