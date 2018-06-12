@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {AlertController, IonicPage} from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController, NavController, ToastController} from 'ionic-angular';
 import {UserServiceProvider} from "../../providers/user-service/user-service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -25,17 +26,24 @@ export class LoginPage {
     ]))
   });
 
-  constructor(public alertCtrl: AlertController, private _userService: UserServiceProvider) {
-
+  constructor(public alertCtrl: AlertController, private _userService: UserServiceProvider, private _loadingController:
+    LoadingController, private _navController: NavController, private _toastController: ToastController) {
   }
 
   login() {
     let user = {email: this.email, password: this.password};
+    let loading = this._loadingController.create({content: "Realizando login..."});
+    loading.present();
     this._userService.login(user).subscribe((result) => {
-      console.log("sucesso no login!");
+      loading.dismiss();
       this._userService.user = result[0];
+      this._navController.setRoot(TabsPage);
+      this._toastController.create({
+        message: 'Logado com sucesso!',
+        duration: 3000
+      }).present();
     }, (error) => {
-      console.log("erro no login!");
+      loading.dismiss();
       this.alertCtrl.create({
         title: "Erro no login",
         message: error['error'],

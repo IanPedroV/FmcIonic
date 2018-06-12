@@ -38,6 +38,7 @@ export class MyApp {
   }
 
   getUser() {
+    console.log(this._userService.user);
     return this._userService.user;
   }
 
