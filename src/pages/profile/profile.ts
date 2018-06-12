@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {IonicPage, Modal, ModalController, ToastController, ViewController} from 'ionic-angular';
 import {Product} from "../../models/product";
 import {PurchaseHistoryPage} from "../purchase-history/purchase-history";
-import {MyApp} from "../../app/app.component";
 import {UserServiceProvider} from "../../providers/user-service/user-service";
 
 @IonicPage()
