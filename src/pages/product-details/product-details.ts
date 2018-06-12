@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {IonicPage, LoadingController, ViewController} from 'ionic-angular';
 import {Product} from "../../models/product";
+import {IapServiceProvider} from "../../providers/iap-service/iap-service";
 
 @IonicPage()
 @Component({
@@ -10,7 +11,7 @@ import {Product} from "../../models/product";
 export class ProductDetailsPage {
   public product: Product;
 
-  constructor(private viewController: ViewController, private nav: NavController) {
+  constructor(private viewController: ViewController, private _loadingCtrl: LoadingController, private iapService: IapServiceProvider) {
     this.product = viewController.data;
   }
 
@@ -18,7 +19,9 @@ export class ProductDetailsPage {
     this.viewController.dismiss(this.viewController.data);
   }
 
-  checkout(product: Product) {
-    this.nav.push('CheckoutPage', this.product);
+  checkout() {
+    let loading = this._loadingCtrl.create({content: 'Concluindo compra...'});
+    loading.present();
+    IapServiceProvider.getStore().order(this.product.id.toString()).then(() => loading.dismiss());
   }
 }

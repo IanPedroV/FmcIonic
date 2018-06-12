@@ -11,7 +11,7 @@ import {IapServiceProvider} from "../../providers/iap-service/iap-service";
 export class CheckoutPage {
   private _product: Product;
 
-  constructor(private _navParams: NavParams, private _store: IapServiceProvider, private _loadingCtrl: LoadingController) {
+  constructor(private _navParams: NavParams, private _loadingCtrl: LoadingController) {
     this._product = this._navParams['data'];
   }
 

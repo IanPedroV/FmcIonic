@@ -15,13 +15,15 @@
   <form (ngSubmit)="login()" #formulario="ngForm" [formGroup]="validations_form">
     <ion-item>
       <ion-input [(ngModel)]="email" type="text" placeholder="Email" formControlName="email"></ion-input>
-      <ion-icon *ngIf="isFieldInvalid('email'); else done_button" name="close" color="danger" item-right></ion-icon>
+      <ion-icon showWhen="ios" *ngIf="isFieldInvalid('email'); else done_button" name="close" color="danger"
+                item-right></ion-icon>
     </ion-item>
 
     <ion-item>
       <ion-input [(ngModel)]="password" type="password" placeholder="Senha do APP"
                  formControlName="password"></ion-input>
-      <ion-icon *ngIf="isFieldInvalid('password'); else done_button" name="close" color="danger" item-right></ion-icon>
+      <ion-icon showWhen="ios" *ngIf="isFieldInvalid('password'); else done_button" name="close" color="danger"
+                item-right></ion-icon>
     </ion-item>
 
     <div item-right style="padding-left: 16px; padding-top: 8px;">Esqueci a senha!</div>
