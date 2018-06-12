@@ -48,10 +48,10 @@ export class IapServiceProvider {
       store.when(productFromAPI.id).refunded((data) => {
         // Do stuff. I don't think refunds work properly tho :(
         this.updateProducts();
-
       });
 
       store.when(productFromAPI.id).cancelled((data) => {
+        console.log(data['additionalData'].pocketNick);
         this.updateProducts();
       });
       console.log(product);

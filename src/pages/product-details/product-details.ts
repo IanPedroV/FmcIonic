@@ -1,7 +1,9 @@
 import {Component} from '@angular/core';
-import {IonicPage, LoadingController, ViewController} from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController, NavController, ViewController} from 'ionic-angular';
 import {Product} from "../../models/product";
 import {IapServiceProvider} from "../../providers/iap-service/iap-service";
+import {UserServiceProvider} from "../../providers/user-service/user-service";
+import {LoginPage} from "../login/login";
 
 @IonicPage()
 @Component({
@@ -11,7 +13,9 @@ import {IapServiceProvider} from "../../providers/iap-service/iap-service";
 export class ProductDetailsPage {
   public product: Product;
 
-  constructor(private viewController: ViewController, private _loadingCtrl: LoadingController, private iapService: IapServiceProvider) {
+  constructor(private viewController: ViewController, private _loadingCtrl: LoadingController, private _alertController:
+                AlertController, private _userService: UserServiceProvider, private _navController: NavController,
+              private _iapService: IapServiceProvider) {
     this.product = viewController.data;
   }
 
@@ -20,8 +24,42 @@ export class ProductDetailsPage {
   }
 
   checkout() {
+    if (!this._userService.user) {
+      const prompt = this._alertController.create({
+        title: 'Compra sem Login',
+        message: "Como você não está logado, informe seu nick do pocket que este pacote será liberado, ou" +
+        " faça login.",
+        inputs: [
+          {
+            name: 'nick',
+            placeholder: 'Nick no Pocket'
+          },
+        ],
+        buttons: [
+          {
+            text: 'Logar',
+            handler: () => {
+              this._navController.push(LoginPage, {product: this.product});
+            }
+          },
+          {
+            text: 'Comprar como Visitante',
+            handler: data => {
+              this.buy(data.nick);
+            }
+          }
+        ]
+      });
+      prompt.present();
+    } else {
+      this.buy(null);
+    }
+  }
+
+  buy(pocketNick) {
     let loading = this._loadingCtrl.create({content: 'Concluindo compra...'});
     loading.present();
-    IapServiceProvider.getStore().order(this.product.id.toString()).then(() => loading.dismiss());
+    IapServiceProvider.getStore().order(this.product.id.toString(), {pocketNick: pocketNick}).then(() => loading.dismiss());
   }
+
 }
