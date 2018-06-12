@@ -3,6 +3,7 @@ import {IonicPage, Modal, ModalController, ToastController, ViewController} from
 import {Product} from "../../models/product";
 import {PurchaseHistoryPage} from "../purchase-history/purchase-history";
 import {MyApp} from "../../app/app.component";
+import {UserServiceProvider} from "../../providers/user-service/user-service";
 
 @IonicPage()
 @Component({
@@ -11,9 +12,12 @@ import {MyApp} from "../../app/app.component";
 })
 export class ProfilePage {
   public product: Product;
+  public user;
 
-  constructor(private toastCtrl: ToastController, private viewController: ViewController, private modal: ModalController) {
+  constructor(private toastCtrl: ToastController, private viewController: ViewController, private modal: ModalController,
+              private _userService: UserServiceProvider) {
     this.product = viewController.data;
+    this.user = this._userService.user;
   }
 
   showToast(message: string, closeButton: string) {
@@ -33,9 +37,5 @@ export class ProfilePage {
 
   closeModal() {
     this.viewController.dismiss(this.viewController.data);
-  }
-
-  getLoggedUser(){
-    return MyApp.user;
   }
 }

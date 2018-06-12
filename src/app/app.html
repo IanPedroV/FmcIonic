@@ -1,7 +1,7 @@
 <ion-nav #myNav [root]="rootPage"></ion-nav>
 <ion-split-pane>
   <ion-menu [content]="conteudo" id="cabecalho-menu">
-    <ion-content *ngIf="logado; else loggedContent">
+    <ion-content *ngIf="getUser(); else loggedContent">
       <ion-item class="cabecalho-menu">
         <ion-avatar item-start><img [src]="getUser().avatar"></ion-avatar>
         <h2>{{getUser().pocketNick}}</h2>

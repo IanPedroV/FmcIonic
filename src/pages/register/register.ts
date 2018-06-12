@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {AlertController, IonicPage} from 'ionic-angular';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServiceProvider} from "../../providers/user-service/user-service";
-import {EmailValidator} from "../../validators/email-validator";
+import {MyApp} from "../../app/app.component";
 
 @IonicPage()
 @Component({
@@ -73,7 +73,9 @@ export class RegisterPage {
       pcNick: null,
       isEmailVerified: false,
       isPocketNickVerified: false,
-      isPcNickVerified: false
+      isPcNickVerified: false,
+      ip: "123123123",
+      lastLogin: MyApp.getFormatedDate(new Date()),
     };
 
     console.log(user);
@@ -93,15 +95,10 @@ export class RegisterPage {
         buttons: ['OK']
       }).present();
     }));
-
-
   }
 
   isFieldInvalid(name: string) {
     return this.validations_form.controls[name].invalid;
   }
 
-  teste(teste) {
-    console.log(teste);
-  }
 }

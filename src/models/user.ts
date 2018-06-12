@@ -9,5 +9,7 @@ export interface User {
   isEmailVerified: boolean,
   isPocketNickVerified: boolean,
   isPcNickVerified: boolean,
+  lastLogin: string;
+  ip: string;
   purchaseList: Purchase[];
 }

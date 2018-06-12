@@ -12,21 +12,27 @@
 
 
 <ion-content padding>
-  <ion-list>
+  <form (ngSubmit)="login()" #formulario="ngForm" [formGroup]="validations_form">
     <ion-item>
-      <ion-label floating>E-mail ou nick do pocket</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input [(ngModel)]="email" type="text" placeholder="Email" formControlName="email"></ion-input>
+      <ion-icon *ngIf="isFieldInvalid('email'); else done_button" name="close" color="danger" item-right></ion-icon>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Senha do aplicativo</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input [(ngModel)]="password" type="password" placeholder="Senha do APP"
+                 formControlName="password"></ion-input>
+      <ion-icon *ngIf="isFieldInvalid('password'); else done_button" name="close" color="danger" item-right></ion-icon>
     </ion-item>
+
     <div item-right style="padding-left: 16px; padding-top: 8px;">Esqueci a senha!</div>
-    <ion-item>
-      <button ion-item color="warning" text-center>
-        Login
+    <ion-item no-lines>
+      <button ion-item color="warning" text-center [disabled]="isInvalid()">
+        Logar
       </button>
     </ion-item>
-  </ion-list>
+
+    <ng-template #done_button>
+      <ion-icon name="checkmark" color="secondary" item-right></ion-icon>
+    </ng-template>
+  </form>
 </ion-content>
