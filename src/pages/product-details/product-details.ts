@@ -29,6 +29,7 @@ export class ProductDetailsPage {
         title: 'Compra sem Login',
         message: "Como você não está logado, informe seu nick do pocket que este pacote será liberado, ou" +
         " faça login.",
+        cssClass: 'buttonCss',
         inputs: [
           {
             name: 'nick',
@@ -43,6 +44,7 @@ export class ProductDetailsPage {
             }
           },
           {
+            cssClass: 'warning-button',
             text: 'Comprar como Visitante',
             handler: data => {
               this.buy(data.nick);
