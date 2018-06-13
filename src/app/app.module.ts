@@ -26,7 +26,9 @@ import {TooltipsModule} from "ionic-tooltips";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RegisterPage} from "../pages/register/register";
 import {LoginPage} from "../pages/login/login";
-import { UserServiceProvider } from '../providers/user-service/user-service';
+import {UserServiceProvider} from '../providers/user-service/user-service';
+import {IonicStorageModule} from "@ionic/storage";
+import { LoginDaoProvider } from '../providers/user-dao/login-dao';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,13 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     BrowserAnimationsModule,
-    TooltipsModule
+    TooltipsModule,
+    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: 'fmc_ionic',
+      storeName: 'login',
+      driverOrder: ['indexeddb']
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -66,7 +74,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     CategoriesServiceProvider,
     IapServiceProvider,
     PurchaseServiceProvider,
-    UserServiceProvider
+    UserServiceProvider,
+    LoginDaoProvider
   ]
 })
 export class AppModule {
