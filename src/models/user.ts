@@ -2,7 +2,7 @@ import {Purchase} from "./purchase";
 
 export interface User {
   email: string,
-  password: string,
+  passwordHash: string,
   avatar: string,
   pocketNick: string,
   pcNick: string,

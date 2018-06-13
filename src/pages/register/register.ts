@@ -3,6 +3,7 @@ import {AlertController, IonicPage} from 'ionic-angular';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServiceProvider} from "../../providers/user-service/user-service";
 import {MyApp} from "../../app/app.component";
+import {EncryptUtils} from "../../utils/bcryptjs/bcryptjs";
 
 @IonicPage()
 @Component({
@@ -64,37 +65,40 @@ export class RegisterPage {
   }
 
   cadastra() {
-    console.log("Tentando cadastrar: " + this.email + " | " + this.pocketNick + " | " + this.password);
-    let user = {
-      email: this.email,
-      password: this.password,
-      avatar: "https://www.drupal.org/files/issues/default-avatar.png",
-      pocketNick: this.pocketNick,
-      pcNick: null,
-      isEmailVerified: false,
-      isPocketNickVerified: false,
-      isPcNickVerified: false,
-      ip: "123123123",
-      lastLogin: MyApp.getFormatedDate(new Date()),
-    };
+    EncryptUtils.encryptPassword(this.password).then((hash, err) => {
+      console.log("Tentando cadastrar: " + this.email + " | " + this.pocketNick + " | " + hash);
+      let user = {
+        email: this.email,
+        passwordHash: hash,
+        avatar: "https://www.drupal.org/files/issues/default-avatar.png",
+        pocketNick: this.pocketNick,
+        pcNick: null,
+        isEmailVerified: false,
+        isPocketNickVerified: false,
+        isPcNickVerified: false,
+        ip: "127.0.0.1",
+        lastLogin: MyApp.getFormatedDate(new Date()),
+      };
 
-    console.log(user);
+      console.log(user);
 
-    this._userService.create(user).subscribe((success) => {
+      this._userService.create(user).subscribe((success) => {
 
-      this.alertCtrl.create({
-        title: "Sucesso no cadastro",
-        message: "Usuário " + this.email + " cadastrado com sucesso! Verifique seu e-mail para confirma-lo!",
-        buttons: ['OK']
-      }).present();
+        this.alertCtrl.create({
+          title: "Sucesso no cadastro",
+          message: "Usuário " + this.email + " cadastrado com sucesso! Verifique seu e-mail para confirma-lo!",
+          buttons: ['OK']
+        }).present();
 
-    }, (error => {
-      this.alertCtrl.create({
-        title: "Erro no cadastro",
-        message: "Erro no cadastro: " + error['error'],
-        buttons: ['OK']
-      }).present();
-    }));
+      }, (error => {
+        this.alertCtrl.create({
+          title: "Erro no cadastro",
+          message: "Erro no cadastro: " + error['error'],
+          buttons: ['OK']
+        }).present();
+      }));
+    });
+
   }
 
   isFieldInvalid(name: string) {

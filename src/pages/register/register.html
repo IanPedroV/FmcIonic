@@ -29,7 +29,7 @@
                 item-right></ion-icon>
     </ion-item>
     <ion-item>
-      <ion-input [(ngModel)]="password" type="{{formFields[0].type}}"
+      <ion-input [(ngModel)]="password" type="{{formFields[2].type}}"
                  placeholder="{{formFields[2].title}}"
                  formControlName="{{formFields[2].name}}"></ion-input>
       <ion-icon *ngIf="isFieldInvalid(formFields[2].name); else done_button" name="close" color="danger"
