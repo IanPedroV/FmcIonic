@@ -7,6 +7,7 @@ import {LoginPage} from "../pages/login/login";
 import {RegisterPage} from "../pages/register/register";
 import {ProfilePage} from "../pages/profile/profile";
 import {UserServiceProvider} from "../providers/user-service/user-service";
+import {LoginDaoProvider} from "../providers/user-dao/login-dao";
 
 
 @Component({
@@ -19,17 +20,18 @@ export class MyApp {
   rootPage: any = TabsPage;
 
 
-
   public pageList = [
     {title: 'Login', component: LoginPage, icon: 'lock', showWhenLogged: false},
     {title: 'Registro', component: RegisterPage, icon: 'clipboard', showWhenLogged: false},
     {title: 'Perfil', component: ProfilePage, icon: 'contact', showWhenLogged: true}
   ];
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private _userService: UserServiceProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private _userService: UserServiceProvider,
+              private _loginDaoProvider: LoginDaoProvider) {
     platform.ready().then(() => {
       splashScreen.hide();
       statusBar.hide();
+      this._loginDaoProvider.verify();
     });
   }
 

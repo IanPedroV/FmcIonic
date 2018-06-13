@@ -3,6 +3,7 @@ import {AlertController, IonicPage, LoadingController, NavController, NavParams,
 import {UserServiceProvider} from "../../providers/user-service/user-service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TabsPage} from "../tabs/tabs";
+import {LoginDaoProvider} from "../../providers/user-dao/login-dao";
 
 @IonicPage()
 @Component({
@@ -26,17 +27,17 @@ export class LoginPage {
     ]))
   });
 
-  constructor(public alertCtrl: AlertController, private _userService: UserServiceProvider, private _loadingController:
+  constructor(private _alertCtrl: AlertController, private _userService: UserServiceProvider, private _loadingController:
                 LoadingController, private _navController: NavController, private _toastController: ToastController,
-              private _navParams: NavParams) {
+              private _navParams: NavParams, private _loginDao: LoginDaoProvider) {
   }
 
   login() {
-    let user = {email: this.email, password: this.password};
     let loading = this._loadingController.create({content: "Realizando login..."});
     loading.present();
-    this._userService.login(user).subscribe((result) => {
+    this._userService.login(this.email, this.password).subscribe((result) => {
       loading.dismiss();
+      this._loginDao.save(result[0].email, result[0].passwordHash);
       this._userService.user = result[0];
       if (Object.keys(this._navParams['data']).length === 0) {
         this._navController.setRoot(TabsPage);
@@ -49,7 +50,7 @@ export class LoginPage {
       }).present();
     }, (error) => {
       loading.dismiss();
-      this.alertCtrl.create({
+      this._alertCtrl.create({
         title: "Erro no login",
         message: error['error'],
         buttons: ['OK']

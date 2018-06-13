@@ -47,7 +47,6 @@ import { LoginDaoProvider } from '../providers/user-dao/login-dao';
     HttpClientModule,
     BrowserAnimationsModule,
     TooltipsModule,
-    IonicStorageModule.forRoot(),
     IonicStorageModule.forRoot({
       name: 'fmc_ionic',
       storeName: 'login',
