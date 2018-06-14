@@ -30,7 +30,7 @@ export class ProfilePage {
   }
 
   showPurchaseHistory(user) {
-    let myModal: Modal = this.modal.create(PurchaseHistoryPage.name);
+    let myModal: Modal = this.modal.create(PurchaseHistoryPage);
     myModal.present();
   }
 

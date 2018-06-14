@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let purchase of user.purchaseList" (click)="showProductDetails(purchase)">
+    <button ion-item *ngFor="let purchase of _purchases" (click)="showProductDetails(purchase)">
       {{purchase.product.name}}
     </button>
   </ion-list>

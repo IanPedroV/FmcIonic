@@ -4,7 +4,7 @@ import {User} from "../../models/user";
 
 @Injectable()
 export class UserServiceProvider {
-  public user: User;
+  private _user: User;
 
   constructor(private _http: HttpClient) {
 
@@ -16,6 +16,18 @@ export class UserServiceProvider {
 
   login(email, password) {
     return this._http.post('http://192.168.15.13:3000/users/login/', {email, password});
+  }
+
+  get(id) {
+    return this._http.get('http://192.168.15.13:3000/users/login/' + id);
+  }
+
+  get user() {
+    return this._user;
+  }
+
+  set user(user) {
+    this._user = user;
   }
 
 

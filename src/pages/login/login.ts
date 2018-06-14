@@ -4,6 +4,8 @@ import {UserServiceProvider} from "../../providers/user-service/user-service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TabsPage} from "../tabs/tabs";
 import {LoginDaoProvider} from "../../providers/user-dao/login-dao";
+import {ProductsServiceProvider} from "../../providers/products-service/products-service";
+import {Product} from "../../models/product";
 
 @IonicPage()
 @Component({
@@ -11,7 +13,6 @@ import {LoginDaoProvider} from "../../providers/user-dao/login-dao";
   templateUrl: 'login.html',
 })
 export class LoginPage {
-
   email: string;
   password: string;
 
@@ -29,7 +30,7 @@ export class LoginPage {
 
   constructor(private _alertCtrl: AlertController, private _userService: UserServiceProvider, private _loadingController:
                 LoadingController, private _navController: NavController, private _toastController: ToastController,
-              private _navParams: NavParams, private _loginDao: LoginDaoProvider) {
+              private _navParams: NavParams, private _loginDao: LoginDaoProvider, private _productService: ProductsServiceProvider) {
   }
 
   login() {
@@ -37,8 +38,13 @@ export class LoginPage {
     loading.present();
     this._userService.login(this.email, this.password).subscribe((result) => {
       loading.dismiss();
-      this._loginDao.save(result[0].email, result[0].passwordHash);
-      this._userService.user = result[0];
+      this._loginDao.save(result['user'][0].email, result['user'][0].passwordHash);
+      this._userService.user = result['user'][0];
+
+      result['purchaseList'].forEach(purchase => purchase.product = this._productService.products.find(product =>
+        product.id === purchase.productId));
+      this._userService.user.purchaseList = result['purchaseList'];
+
       if (Object.keys(this._navParams['data']).length === 0) {
         this._navController.setRoot(TabsPage);
       } else {

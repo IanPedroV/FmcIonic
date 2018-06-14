@@ -15,20 +15,38 @@
 
 
 <ion-content padding>
-  <ion-card>
-    <button ion-item color="warning" text-center>
-      Compra de: {{purchase.product.name}}
-    </button>
-    <ion-list>
-      <button ion-item>
-        Data da compra: {{purchase.date}}
-      </button>
-      <button ion-item>
-        Pagamento por: {{purchase.paymentMethod}}
-      </button>
-      <button ion-item>
-        Valor: R$ {{purchase.product.price}}.00
-      </button>
-    </ion-list>
-  </ion-card>
+  <!--<ion-card>-->
+  <!--<button ion-item color="warning" text-center>-->
+  <!--Compra de: {{purchase.product.name}}-->
+  <!--</button>-->
+  <!--<ion-list>-->
+  <!--<button ion-item>-->
+  <!--Data da compra: {{purchase.date}}-->
+  <!--</button>-->
+  <!--<button ion-item>-->
+  <!--Pagamento por: {{purchase.paymentMethod}}-->
+  <!--</button>-->
+  <!--<button ion-item>-->
+  <!--Valor: R$ {{purchase.product.price}}.00-->
+  <!--</button>-->
+  <!--</ion-list>-->
+  <!--</ion-card>-->
+  <ion-item>
+    <h1 text-center>Detalhes da compra:</h1>
+  </ion-item>
+  <ion-item>
+    Produto: {{purchase.product.name}}
+  </ion-item>
+  <ion-item>
+    Data: {{purchase.date}}
+  </ion-item>
+  <ion-item>
+    Pagamento por: {{purchase.paymentMethod}}
+  </ion-item>
+  <ion-item>
+    Valor: R$ {{purchase.product.price}}
+  </ion-item>
+  <ion-toolbar position="bottom">
+    <button ion-button full color="secondary">Status: {{purchase.status}}</button>
+  </ion-toolbar>
 </ion-content>

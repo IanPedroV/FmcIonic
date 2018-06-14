@@ -41,10 +41,10 @@ export class ProductsPage {
   }
 
   private assignCatetories(products) {
-    products.map(product => {
-      product.category = this.categoryList.find(category =>
-        category.id === product.category_id);
-      product.features = product.features.split(',')
+    products.map((product) => {
+      product.category = this.categoryList.find((category: Category) =>
+        category.id === product.categoryId);
+      product.features = product.features.split(',');
     });
   }
 

@@ -28,7 +28,10 @@ import {RegisterPage} from "../pages/register/register";
 import {LoginPage} from "../pages/login/login";
 import {UserServiceProvider} from '../providers/user-service/user-service';
 import {IonicStorageModule} from "@ionic/storage";
-import { LoginDaoProvider } from '../providers/user-dao/login-dao';
+import {LoginDaoProvider} from '../providers/user-dao/login-dao';
+import {ProfilePage} from "../pages/profile/profile";
+import {PurchaseHistoryPage} from "../pages/purchase-history/purchase-history";
+import {PurchaseDetailsPage} from "../pages/purchase-details/purchase-details";
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { LoginDaoProvider } from '../providers/user-dao/login-dao';
     FeedPage,
     ProductDetailsPage,
     RegisterPage,
-    LoginPage
+    LoginPage,
+    ProfilePage,
+    PurchaseHistoryPage,
+    PurchaseDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +68,10 @@ import { LoginDaoProvider } from '../providers/user-dao/login-dao';
     FeedPage,
     ProductDetailsPage,
     RegisterPage,
-    LoginPage
+    LoginPage,
+    ProfilePage,
+    PurchaseHistoryPage,
+    PurchaseDetailsPage
   ],
   providers: [
     StatusBar,

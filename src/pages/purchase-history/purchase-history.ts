@@ -10,18 +10,23 @@ import {UserServiceProvider} from "../../providers/user-service/user-service";
   templateUrl: 'purchase-history.html',
 })
 export class PurchaseHistoryPage {
-  public user;
+  private readonly _purchases: Array<Purchase> = [];
 
   constructor(private modal: ModalController, private viewController: ViewController, private _userService: UserServiceProvider) {
-    this.user = this._userService.user;
+    this._purchases = this._userService.user.purchaseList;
+    console.log(this._purchases);
   }
 
   showProductDetails(purchase: Purchase) {
-    let myModal: Modal = this.modal.create(PurchaseDetailsPage.name, purchase);
+    let myModal: Modal = this.modal.create(PurchaseDetailsPage, purchase);
     myModal.present();
   }
 
   closeModal() {
     this.viewController.dismiss(this.viewController.data);
+  }
+
+  test(message){
+    console.log(message);
   }
 }
