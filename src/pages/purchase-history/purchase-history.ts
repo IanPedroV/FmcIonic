@@ -14,7 +14,6 @@ export class PurchaseHistoryPage {
 
   constructor(private modal: ModalController, private viewController: ViewController, private _userService: UserServiceProvider) {
     this._purchases = this._userService.user.purchaseList;
-    console.log(this._purchases);
   }
 
   showProductDetails(purchase: Purchase) {
@@ -26,7 +25,7 @@ export class PurchaseHistoryPage {
     this.viewController.dismiss(this.viewController.data);
   }
 
-  test(message){
-    console.log(message);
+  getPurchases() {
+    return this._purchases;
   }
 }

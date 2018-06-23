@@ -4,8 +4,6 @@ import {Storage} from '@ionic/storage';
 import {UserServiceProvider} from "../user-service/user-service";
 import {ToastController} from "ionic-angular";
 import {ProductsServiceProvider} from "../products-service/products-service";
-import {Purchase} from "../../models/purchase";
-import {Product} from "../../models/product";
 
 @Injectable()
 export class LoginDaoProvider {

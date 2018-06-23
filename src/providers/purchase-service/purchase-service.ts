@@ -18,12 +18,16 @@ export class PurchaseServiceProvider {
 
   }
 
-  create(purchase: Purchase) {
-    this._http.post('http://192.168.15.13:3000/purchases/purchase', purchase);
+  create(purchase) {
+    return this._http.post('http://192.168.15.13:3000/purchases/purchase', purchase);
   }
 
-  update(purchase: Purchase) {
-    this._http.put('http://192.168.15.13:3000/purchases/purchase', purchase);
+  update(purchase) {
+    return this._http.put('http://192.168.15.13:3000/purchases/purchase/' + purchase.orderId, purchase);
+  }
+
+  verify(data) {
+    return this._http.post('http://192.168.15.13:3000/purchases/verify', data);
   }
 
 }

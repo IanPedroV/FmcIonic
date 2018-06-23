@@ -13,7 +13,7 @@ export class ProductsServiceProvider {
   }
 
   list() {
-    return this._http.get<Product[]>('http://192.168.15.13:3000/produtos');
+    return this._http.get<Product[]>('http://192.168.15.13:3000/products');
   }
 
 }

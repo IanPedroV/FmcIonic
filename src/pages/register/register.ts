@@ -82,7 +82,7 @@ export class RegisterPage {
 
       console.log(user);
 
-      this._userService.create(user).subscribe((success) => {
+      this._userService.create(user).subscribe(() => {
 
         this.alertCtrl.create({
           title: "Sucesso no cadastro",
