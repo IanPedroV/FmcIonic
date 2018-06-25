@@ -26,12 +26,26 @@ export class IapServiceProvider {
       this._purchaseService.verify(data).subscribe((response) => callback(response['verified'], response['transaction']));
     });
 
+
     this._productsService.list().subscribe(productsFromAPI => productsFromAPI.forEach((productFromAPI: Product) => {
       product = {
         id: productFromAPI.id.toString(),
         alias: productFromAPI.id.toString(),
-        type: "consumable"
+        type: productFromAPI.type
       };
+
+      store.when(productFromAPI.id).initiated(() => {
+        console.log("COMPRA INICIADA!");
+      });
+
+
+      store.when(productFromAPI.id).approved((order) => {
+        order.verify();
+        let purchase = IapServiceProvider.orderToPurchase(order, "PROCESSANDO", 0, 0);
+        console.log("APPROVING");
+        this._purchaseService.create(purchase).subscribe(() => {
+        });
+      });
 
       store.when(productFromAPI.id).verified((order) => {
         let purchase = IapServiceProvider.orderToPurchase(order, "VERIFICADA", 0, 0);
@@ -44,35 +58,21 @@ export class IapServiceProvider {
       store.when(productFromAPI.id).finished((order) => {
         let purchase = IapServiceProvider.orderToPurchase(order, "APROVADA", 1, 0);
         this._purchaseService.update(purchase).subscribe(() => {
-        console.log("FINISHING");
+          console.log("FINISHING");
         });
-      });
-
-      store.when(productFromAPI.id).approved((order) => {
-        order.verify();
-        let purchase = IapServiceProvider.orderToPurchase(order, "PROCESSANDO", 0, 0);
-        console.log("APPROVING");
-        this._purchaseService.create(purchase).subscribe(() => {
-        });
-        // this.updateProducts();
       });
 
       store.when(productFromAPI.id).updated(() => {
-        // this.updateProducts();
       });
 
       store.when(productFromAPI.id).owned(() => {
-        // Product owned
-        // this.updateProducts();
       });
 
       store.when(productFromAPI.id).refunded(() => {
-        // this.updateProducts();
       });
 
       store.when(productFromAPI.id).cancelled(() => {
         // console.log(data['additionalData'].pocketNick);
-        // this.updateProducts();
       });
       console.log(product);
       store.register(product);
@@ -106,8 +106,8 @@ export class IapServiceProvider {
     let receipt = JSON.parse(order.transaction.receipt);
     let purchase = {
       productId: order.id,
-      userId: order.additionalData.userId,
-      userNick: order.additionalData.pocketNick,
+      userId: 1,
+      userNick: "",
       paymentMethod: "Google Play",
       status: status,
       token: transaction.purchaseToken,
@@ -116,9 +116,10 @@ export class IapServiceProvider {
       purchaseState: purchaseState,
       consumptionState: consumptionState,
       orderId: transaction.id,
-      purchaseType: null
+      purchaseType: order.type
     };
     console.log(purchase);
+    console.log(order.type);
     return purchase;
   }
 
