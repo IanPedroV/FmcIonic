@@ -12,6 +12,5 @@ export interface Purchase {
   purchaseTimeMillis: string,
   purchaseState: number,
   consumptionState: number,
-  orderId: string,
-  purchaseType: number
+  orderId: string
 }
