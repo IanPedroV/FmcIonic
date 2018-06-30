@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TabsPage} from "../tabs/tabs";
 import {LoginDaoProvider} from "../../providers/user-dao/login-dao";
 import {ProductsServiceProvider} from "../../providers/products-service/products-service";
+import {PurchaseServiceProvider} from "../../providers/purchase-service/purchase-service";
 
 @IonicPage()
 @Component({
@@ -29,7 +30,7 @@ export class LoginPage {
 
   constructor(private _alertCtrl: AlertController, private _userService: UserServiceProvider, private _loadingController:
                 LoadingController, private _navController: NavController, private _toastController: ToastController,
-              private _navParams: NavParams, private _loginDao: LoginDaoProvider, private _productService: ProductsServiceProvider) {
+              private _navParams: NavParams, private _loginDao: LoginDaoProvider, private _purchaseService: PurchaseServiceProvider) {
   }
 
   login() {
@@ -39,9 +40,7 @@ export class LoginPage {
       loading.dismiss();
       this._loginDao.save(result['user'][0].email, result['user'][0].passwordHash);
       this._userService.user = result['user'][0];
-
-      result['purchaseList'].forEach(purchase => purchase.product = this._productService.products.find(product =>
-        product.id === purchase.productId));
+      this._purchaseService.assignProducts(result['purchaseList']);
       this._userService.user.purchaseList = result['purchaseList'];
 
       if (Object.keys(this._navParams['data']).length === 0) {

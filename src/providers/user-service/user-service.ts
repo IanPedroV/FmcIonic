@@ -1,12 +1,14 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {User} from "../../models/user";
+import {PurchaseServiceProvider} from "../purchase-service/purchase-service";
+import {Purchase} from "../../models/purchase";
 
 @Injectable()
 export class UserServiceProvider {
   private _user: User;
 
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient, private _purchaseService: PurchaseServiceProvider) {
 
   }
 
@@ -30,5 +32,10 @@ export class UserServiceProvider {
     this._user = user;
   }
 
+  updatePurchase(purchase) {
+    let objIndex = this.user.purchaseList.findIndex((obj => obj.orderId === purchase.orderId));
+    this.user.purchaseList[objIndex] = purchase;
+    this._purchaseService.assignProduct(this.user.purchaseList[objIndex], this.user.purchaseList);
+  }
 
 }

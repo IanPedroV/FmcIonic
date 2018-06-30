@@ -3,13 +3,14 @@ import {Observable} from "rxjs/Observable";
 import {Storage} from '@ionic/storage';
 import {UserServiceProvider} from "../user-service/user-service";
 import {ToastController} from "ionic-angular";
-import {ProductsServiceProvider} from "../products-service/products-service";
+import {PurchaseSorter} from "../../utils/purchase-sorter";
+import {PurchaseServiceProvider} from "../purchase-service/purchase-service";
 
 @Injectable()
 export class LoginDaoProvider {
 
   constructor(private _storage: Storage, private _userService: UserServiceProvider,
-              private _toastController: ToastController, private _productService: ProductsServiceProvider) {
+              private _toastController: ToastController, private _purchaseService: PurchaseServiceProvider) {
   }
 
   verify() {
@@ -17,15 +18,13 @@ export class LoginDaoProvider {
       if (loginInfo) {
         this._userService.login(loginInfo.email, loginInfo.passwordHash).subscribe((result) => {
           this._userService.user = result['user'][0];
-
-          result['purchaseList'].forEach(purchase => purchase.product = this._productService.products.find(
-            product => product.id === purchase.productId));
+          this._purchaseService.assignProducts(result['purchaseList']);
           this._userService.user.purchaseList = result['purchaseList'];
-
           this._toastController.create({
             message: 'Login verificado com sucesso!',
             duration: 3000
           }).present();
+          PurchaseSorter.sortPurchases(this._userService.user.purchaseList);
         }, () => {
           this._toastController.create({
             message: 'Erro ao verificar login, entre novamente!',

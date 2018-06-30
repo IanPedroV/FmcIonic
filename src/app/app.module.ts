@@ -78,12 +78,12 @@ import {PurchaseDetailsPage} from "../pages/purchase-details/purchase-details";
     SplashScreen,
     InAppPurchase2,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProductsServiceProvider,
     CategoriesServiceProvider,
-    IapServiceProvider,
+    ProductsServiceProvider,
     PurchaseServiceProvider,
     UserServiceProvider,
     LoginDaoProvider,
+    IapServiceProvider,
   ]
 })
 export class AppModule {

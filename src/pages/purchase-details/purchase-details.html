@@ -13,10 +13,12 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
   <ion-item>
     <h1 text-center>Detalhes da compra:</h1>
+  </ion-item>
+  <ion-item>
+    Id: {{purchase.orderId}}
   </ion-item>
   <ion-item>
     Produto: {{purchase.product.name}}
@@ -31,9 +33,20 @@
     Valor: R$ {{purchase.product.price}}.00
   </ion-item>
   <ion-toolbar position="bottom" [ngSwitch]="purchase.status">
-    <button ion-button full color="secondary" *ngSwitchCase="'APROVADA'">Status: {{purchase.status}}</button>
-    <button ion-button full *ngSwitchCase="'PROCESSANDO'">Status: {{purchase.status}}</button>
-    <button ion-button full color="danger" *ngSwitchCase="'RECUSADA'">Status: {{purchase.status}}</button>
-    <button ion-button full color="dark" *ngSwitchCase="'REEMBOLSADA'">Status: {{purchase.status}}</button>
+    <button ion-button full color="secondary" *ngSwitchCase="'APROVADA' || 'LIBERADA'">Status: {{purchase
+      .status}}
+    </button>
+    <button ion-button full color="danger" *ngSwitchCase="'RECUSADA' || 'EXPIRADA'">Status: {{purchase
+      .status}}
+    </button>
+    <button ion-button full color="primary" *ngSwitchCase="'VERIFICADA'">Status: {{purchase
+      .status}}
+    </button>
+    <button ion-button full color="light" *ngSwitchCase="'AGUARDANDO LIBERACAO'">Status: {{purchase
+      .status}}
+    </button>
+    <button ion-button full color="warning" *ngSwitchCase="'DISPUTADA'">Status: {{purchase.status}}</button>
+    <button ion-button full color="dark" *ngSwitchCase="'REEMBOLSADA'">Status: {{purchase.status}}
+    </button>
   </ion-toolbar>
 </ion-content>
