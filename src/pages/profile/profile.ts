@@ -29,7 +29,7 @@ export class ProfilePage {
     toast.present();
   }
 
-  showPurchaseHistory(user) {
+  showPurchaseHistory() {
     let myModal: Modal = this.modal.create(PurchaseHistoryPage);
     myModal.present();
   }
