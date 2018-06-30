@@ -22,18 +22,18 @@
     Produto: {{purchase.product.name}}
   </ion-item>
   <ion-item>
-    Data: {{purchase.date}}
+    Data: {{formatPurchaseDate()}}
   </ion-item>
   <ion-item>
-    Pagamento por: {{purchase.paymentMethod}}
+    Pago via: {{purchase.paymentMethod}}
   </ion-item>
   <ion-item>
     Valor: R$ {{purchase.product.price}}.00
   </ion-item>
   <ion-toolbar position="bottom" [ngSwitch]="purchase.status">
-    <button ion-button full color="secondary" *ngSwitchCase="'APROVADO'">Status: {{purchase.status}}</button>
+    <button ion-button full color="secondary" *ngSwitchCase="'APROVADA'">Status: {{purchase.status}}</button>
     <button ion-button full *ngSwitchCase="'PROCESSANDO'">Status: {{purchase.status}}</button>
-    <button ion-button full color="danger" *ngSwitchCase="'RECUSADO'">Status: {{purchase.status}}</button>
-    <button ion-button full color="dark" *ngSwitchCase="'REEMBOLSADO'">Status: {{purchase.status}}</button>
+    <button ion-button full color="danger" *ngSwitchCase="'RECUSADA'">Status: {{purchase.status}}</button>
+    <button ion-button full color="dark" *ngSwitchCase="'REEMBOLSADA'">Status: {{purchase.status}}</button>
   </ion-toolbar>
 </ion-content>

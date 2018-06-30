@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, ViewController} from 'ionic-angular';
 import {Purchase} from "../../models/purchase";
+import {DateFormatter} from "../../utils/dateFormatter";
 
 @IonicPage()
 @Component({
@@ -17,6 +18,10 @@ export class PurchaseDetailsPage {
   closeModal() {
     this.viewController.dismiss(this.viewController.data);
   }
+
+  formatPurchaseDate(){
+    return DateFormatter.formatDate(this.purchase.purchaseTimeMillis);
+}
 
 
 }
