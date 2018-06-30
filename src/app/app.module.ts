@@ -83,7 +83,7 @@ import {PurchaseDetailsPage} from "../pages/purchase-details/purchase-details";
     IapServiceProvider,
     PurchaseServiceProvider,
     UserServiceProvider,
-    LoginDaoProvider
+    LoginDaoProvider,
   ]
 })
 export class AppModule {

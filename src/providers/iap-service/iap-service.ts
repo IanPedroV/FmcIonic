@@ -36,7 +36,7 @@ export class IapServiceProvider {
 
       store.when(productFromAPI.id).approved((order) => {
         order.verify();
-        let purchase = this.orderToPurchase(order, "PROCESSANDO", 0, 0);
+        let purchase = this.orderToPurchase(order, "APROVADA", 0, 0);
         console.log("APPROVING");
         this._purchaseService.create(purchase).subscribe(() => {
         });
@@ -51,7 +51,7 @@ export class IapServiceProvider {
       });
 
       store.when(productFromAPI.id).finished((order) => {
-        let purchase = this.orderToPurchase(order, "APROVADA", 1, 0);
+        let purchase = this.orderToPurchase(order, "AGUARDANDO LIBERACAO", 1, 0);
         this._purchaseService.update(purchase).subscribe(() => {
           console.log("FINISHING");
         });

@@ -29,45 +29,5 @@
       <ion-col></ion-col>
     </ion-row>
   </ion-grid>
-  <ion-card>
-    <ion-card-header>
-      Informações do usuário:
-    </ion-card-header>
-    <ion-list inset>
-
-      <ion-item>
-        <ion-label>E-mail:</ion-label>
-        <ion-input type="text" [value]="user.email"></ion-input>
-        <button *ngIf="!user.isEmailVerified" ion-button clear color="danger" type="button" item-right
-                (click)="showToast('E-mail ainda não verificado','Verificar')">
-          <ion-icon name="close"></ion-icon>
-        </button>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Senha:</ion-label>
-        <ion-input type="password" [value]="user.password"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Nick no PC:</ion-label>
-        <ion-input type="text" [value]="user.pcNick"></ion-input>
-        <button *ngIf="!user.isPcNickVerified" ion-button clear color="danger" type="button" item-right
-                (click)="showToast('Nick ainda não verificado','Verificar')">
-          <ion-icon name="close"></ion-icon>
-        </button>
-      </ion-item>
-      <ion-item>
-        <ion-label>Nick no Pocket:</ion-label>
-        <ion-input type="text" [value]="user.pocketNick"></ion-input>
-        <button *ngIf="!user.isPocketNickVerified" ion-button clear color="danger" type="button" item-right
-                (click)="showToast('Nick ainda não verificado','Verificar')">
-          <ion-icon name="close"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-list>
-    <ion-item text-center>
-      <button ion-button color="warning" disabled>Salvar Informações</button>
-    </ion-item>
-  </ion-card>
 
 </ion-content>
