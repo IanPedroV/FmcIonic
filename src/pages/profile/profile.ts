@@ -1,8 +1,11 @@
 import {Component} from '@angular/core';
-import {IonicPage, Modal, ModalController, ToastController, ViewController} from 'ionic-angular';
+import {IonicPage, Modal, ModalController, NavController, ToastController, ViewController} from 'ionic-angular';
 import {Product} from "../../models/product";
 import {PurchaseHistoryPage} from "../purchase-history/purchase-history";
 import {UserServiceProvider} from "../../providers/user-service/user-service";
+import {LoginPage} from "../login/login";
+import {TabsPage} from "../tabs/tabs";
+import {LoginDaoProvider} from "../../providers/user-dao/login-dao";
 
 @IonicPage()
 @Component({
@@ -14,7 +17,7 @@ export class ProfilePage {
   public user;
 
   constructor(private toastCtrl: ToastController, private viewController: ViewController, private modal: ModalController,
-              private _userService: UserServiceProvider) {
+              private _userService: UserServiceProvider, private _loginDao: LoginDaoProvider, private _navController: NavController) {
     this.product = viewController.data;
     this.user = this._userService.user;
   }
@@ -27,6 +30,17 @@ export class ProfilePage {
       closeButtonText: closeButton,
     });
     toast.present();
+  }
+
+  logout() {
+    this._loginDao.remove().then(() => {
+      this._userService.user = null;
+      this._navController.setRoot(TabsPage);
+      this.toastCtrl.create({
+        message: 'Deslogou com sucesso!',
+        duration: 3000
+      }).present();
+    });
   }
 
   showPurchaseHistory() {

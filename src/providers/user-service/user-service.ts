@@ -2,7 +2,6 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {User} from "../../models/user";
 import {PurchaseServiceProvider} from "../purchase-service/purchase-service";
-import {Purchase} from "../../models/purchase";
 
 @Injectable()
 export class UserServiceProvider {

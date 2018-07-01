@@ -49,7 +49,7 @@ export class LoginDaoProvider {
   }
 
   remove() {
-    this._storage.remove('0');
+    return this._storage.clear();
   }
 
   get() {
