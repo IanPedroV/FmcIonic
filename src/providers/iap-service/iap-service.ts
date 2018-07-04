@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Platform} from "ionic-angular";
-import {IAPProduct} from "@ionic-native/in-app-purchase-2";
+import {AlertController, ModalController, Platform} from "ionic-angular";
 import {ProductsServiceProvider} from "../products-service/products-service";
 import {Product} from "../../models/product";
 import {PurchaseServiceProvider} from "../purchase-service/purchase-service";
 import {UserServiceProvider} from "../user-service/user-service";
 import {Purchase} from "../../models/purchase";
+import {PurchaseDetailsPage} from "../../pages/purchase-details/purchase-details";
 
 declare var store: any;
 
@@ -13,7 +13,7 @@ declare var store: any;
 export class IapServiceProvider {
 
   constructor(public platform: Platform, private _productsService: ProductsServiceProvider, private _purchaseService:
-    PurchaseServiceProvider, private _userService: UserServiceProvider) {
+    PurchaseServiceProvider, private _userService: UserServiceProvider, private _alertCtrl: AlertController, private modalController: ModalController) {
     platform.ready().then(() => {
         if (store)
           this.initProducts();
@@ -35,12 +35,25 @@ export class IapServiceProvider {
       };
 
       store.when(productFromAPI.id).approved((order) => {
+        console.log("APPROVING");
         order.verify();
         let purchase = this.orderToPurchase(order, "APROVADA", 0, 0);
         this._purchaseService.create(purchase).subscribe((purchase: Purchase) => {
           this._userService.user.purchaseList.push(purchase);
           this._purchaseService.assignProduct(purchase, this._userService.user.purchaseList);
-          console.log("APPROVING");
+          this.modalController.create(PurchaseDetailsPage, purchase).present();
+          // this._alertCtrl.create({
+          //   title: "SUCESSO!",
+          //   message: "Parabéns pela sua compra! A mesma foi realizada com sucesso.",
+          //   buttons: [
+          //     {
+          //       text: 'Ver compra',
+          //       handler: () => {
+          //         this.modalController.create(PurchaseDetailsPage, purchase).present();
+          //       }
+          //     },
+          //   ]
+          // }).present();
         });
 
       });
@@ -48,8 +61,8 @@ export class IapServiceProvider {
       store.when(productFromAPI.id).verified((order) => {
         let purchase = this.orderToPurchase(order, "VERIFICADA", 0, 0);
         this._purchaseService.update(purchase).subscribe((purchase) => {
-          this._userService.updatePurchase(purchase);
           console.log("VERIFYING");
+          this._userService.updatePurchase(purchase);
         });
         order.finish();
       });
@@ -57,8 +70,8 @@ export class IapServiceProvider {
       store.when(productFromAPI.id).finished((order) => {
         let purchase = this.orderToPurchase(order, "AGUARDANDO LIBERACAO", 1, 0);
         this._purchaseService.update(purchase).subscribe((purchase) => {
-          this._userService.updatePurchase(purchase);
           console.log("FINISHING");
+          this._userService.updatePurchase(purchase);
         });
       });
 

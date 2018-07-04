@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {IonicPage, ViewController} from 'ionic-angular';
-import {Purchase} from "../../models/purchase";
 import {DateFormatter} from "../../utils/dateFormatter";
+import {UserServiceProvider} from "../../providers/user-service/user-service";
+import "rxjs/add/observable/interval";
 
 @IonicPage()
 @Component({
@@ -9,19 +10,28 @@ import {DateFormatter} from "../../utils/dateFormatter";
   templateUrl: 'purchase-details.html',
 })
 export class PurchaseDetailsPage {
-  purchase: Purchase;
+  purchase: any;
 
-  constructor(private viewController: ViewController) {
-    this.purchase = viewController.data;
+  constructor(private viewController: ViewController, private _userService: UserServiceProvider) {
+    this.purchase = this._userService.user.purchaseList.find(p => p.orderId === this.viewController.data.orderId);
+
   }
+
+  // ionViewDidLoad() {
+  //   this.purchase = this._userService.user.purchaseList.find(p => p.orderId === this.viewController.data.orderId);
+  // }
 
   closeModal() {
     this.viewController.dismiss(this.viewController.data);
   }
 
-  formatPurchaseDate(){
+  formatPurchaseDate() {
     return DateFormatter.formatDate(this.purchase.purchaseTimeMillis);
-}
+  }
 
+  test() {
+    console.log(this.purchase);
+    console.log(this._userService.user.purchaseList.find(p => p.orderId === this.viewController.data.orderId));
+  }
 
 }

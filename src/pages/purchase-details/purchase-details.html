@@ -14,6 +14,16 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-item>
     <h1 text-center>Detalhes da compra:</h1>
   </ion-item>
@@ -31,6 +41,9 @@
   </ion-item>
   <ion-item>
     Valor: R$ {{purchase.product.price}}.00
+  </ion-item>
+  <ion-item>
+    STATUS: {{purchase.status}}
   </ion-item>
   <ion-toolbar position="bottom" [ngSwitch]="purchase.status">
     <button ion-button full color="secondary" *ngSwitchCase="'APROVADA' || 'LIBERADA'">Status: {{purchase

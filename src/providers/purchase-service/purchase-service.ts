@@ -1,7 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {ProductsServiceProvider} from "../products-service/products-service";
-import {UserServiceProvider} from "../user-service/user-service";
 import {PurchaseSorter} from "../../utils/purchase-sorter";
 
 @Injectable()
@@ -21,6 +20,7 @@ export class PurchaseServiceProvider {
   }
 
   create(purchase) {
+    console.log('creating purchase');
     return this._http.post('http://192.168.15.13:3000/purchases/purchase', purchase);
   }
 
