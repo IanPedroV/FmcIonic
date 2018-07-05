@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AlertController, ModalController, Platform} from "ionic-angular";
+import {ModalController, Platform} from "ionic-angular";
 import {ProductsServiceProvider} from "../products-service/products-service";
 import {Product} from "../../models/product";
 import {PurchaseServiceProvider} from "../purchase-service/purchase-service";
@@ -13,7 +13,7 @@ declare var store: any;
 export class IapServiceProvider {
 
   constructor(public platform: Platform, private _productsService: ProductsServiceProvider, private _purchaseService:
-    PurchaseServiceProvider, private _userService: UserServiceProvider, private _alertCtrl: AlertController, private modalController: ModalController) {
+    PurchaseServiceProvider, private _userService: UserServiceProvider, private modalController: ModalController) {
     platform.ready().then(() => {
         if (store)
           this.initProducts();

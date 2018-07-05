@@ -12,119 +12,19 @@
 
 <ion-content class="cards-bg social-cards">
 
-  <ion-card>
-
+  <ion-card *ngFor="let video of videos">
     <ion-item>
       <ion-avatar item-start>
         <img src="assets/img/avatar-spok.jpg">
       </ion-avatar>
-      <h2>Spok</h2>
-      <p>Hoje</p>
+      <h2>{{video.channelName}}</h2>
+      <p>{{formatDate(video.publishDate)}}</p>
     </ion-item>
-    <img src="assets/img/ezgif-4-b997d1b081.gif">
+    <img src="{{video.thumbnail}}">
     <ion-card-content>
-      <p>FAMILIA ESTOU EM LIVE VEM!</p>
+      <p>{{video.title}}</p>
     </ion-card-content>
-    <ion-row>
-      <ion-col>
-        <button ion-button color="warning" clear small icon-start>
-          <ion-icon name='play'></ion-icon>
-          VER
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button color="warning" clear small icon-start>
-          <ion-icon name='share'></ion-icon>
-          COMPARTILHAR
-        </button>
-      </ion-col>
-      <ion-col align-self-center share-center>
-        <ion-note>
-          11h ago
-        </ion-note>
-      </ion-col>
-    </ion-row>
-
   </ion-card>
-
-
-  <ion-card>
-
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/img/avatar-bm.jpg">
-      </ion-avatar>
-      <h2>BaixaMemoria</h2>
-      <p>Hoje</p>
-    </ion-item>
-
-    <img src="assets/img/ezgif-4-413365495c.gif">
-
-    <ion-card-content>
-      <p>COMEÇOUU A LIVE DE MINECRAFT!</p>
-    </ion-card-content>
-
-    <ion-row>
-      <ion-col>
-        <button ion-button color="warning" clear small icon-start>
-          <ion-icon name='play'></ion-icon>
-          VER
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button color="warning" clear small icon-start>
-          <ion-icon name='share'></ion-icon>
-          COMPARTILHE!
-        </button>
-      </ion-col>
-      <ion-col align-self-center share-center>
-        <ion-note>
-          30yr ago
-        </ion-note>
-      </ion-col>
-    </ion-row>
-
-  </ion-card>
-
-
-  <ion-card>
-
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/img/avatar-malena.jpg">
-      </ion-avatar>
-      <h2>Malena0202</h2>
-      <p>Hoje</p>
-    </ion-item>
-
-    <img src="assets/img/ezgif-4-89e0862f22.gif">
-
-    <ion-card-content>
-      <p>COMEÇANDO AGORA A LIVE NO FACEBOOK!</p>
-    </ion-card-content>
-
-    <ion-row>
-      <ion-col>
-        <button ion-button color="warning" clear small icon-start>
-          <ion-icon name='play'></ion-icon>
-          VER
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button color="warning" clear small icon-start>
-          <ion-icon name='share'></ion-icon>
-          COMPARTILHE!
-        </button>
-      </ion-col>
-      <ion-col align-self-center share-center>
-        <ion-note>
-          2d ago
-        </ion-note>
-      </ion-col>
-    </ion-row>
-
-  </ion-card>
-
 
 </ion-content>
 

@@ -3,7 +3,7 @@ import {Observable} from "rxjs/Observable";
 import {Storage} from '@ionic/storage';
 import {UserServiceProvider} from "../user-service/user-service";
 import {ToastController} from "ionic-angular";
-import {PurchaseSorter} from "../../utils/purchase-sorter";
+import {ArraySorter} from "../../utils/arraySorter";
 import {PurchaseServiceProvider} from "../purchase-service/purchase-service";
 
 @Injectable()
@@ -24,7 +24,7 @@ export class LoginDaoProvider {
             message: 'Login verificado com sucesso!',
             duration: 3000
           }).present();
-          PurchaseSorter.sortPurchases(this._userService.user.purchaseList);
+          ArraySorter.sortByMillisecondsDate(this._userService.user.purchaseList);
         }, () => {
           this._toastController.create({
             message: 'Erro ao verificar login, entre novamente!',

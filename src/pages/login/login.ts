@@ -4,7 +4,6 @@ import {UserServiceProvider} from "../../providers/user-service/user-service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TabsPage} from "../tabs/tabs";
 import {LoginDaoProvider} from "../../providers/user-dao/login-dao";
-import {ProductsServiceProvider} from "../../providers/products-service/products-service";
 import {PurchaseServiceProvider} from "../../providers/purchase-service/purchase-service";
 
 @IonicPage()

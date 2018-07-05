@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, Modal, ModalController, NavController, ViewController} from 'ionic-angular';
+import {IonicPage, Modal, ModalController, ViewController} from 'ionic-angular';
 import {PurchaseDetailsPage} from "../purchase-details/purchase-details";
 import {Purchase} from "../../models/purchase";
 import {UserServiceProvider} from "../../providers/user-service/user-service";

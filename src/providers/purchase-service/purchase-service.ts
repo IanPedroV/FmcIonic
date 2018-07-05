@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {ProductsServiceProvider} from "../products-service/products-service";
-import {PurchaseSorter} from "../../utils/purchase-sorter";
+import {ArraySorter} from "../../utils/arraySorter";
 
 @Injectable()
 export class PurchaseServiceProvider {
@@ -35,13 +35,13 @@ export class PurchaseServiceProvider {
 
   assignProduct(purchase, purchases: Array<any>) {
     purchase.product = this._productService.products.find(product => product.id === parseInt(purchase.productId));
-    PurchaseSorter.sortPurchases(purchases);
+    ArraySorter.sortByMillisecondsDate(purchases);
   }
 
   assignProducts(purchases: Array<any>) {
     purchases.forEach(purchase => purchase.product = this._productService.products.find(product =>
       product.id === purchase.productId));
-    PurchaseSorter.sortPurchases(purchases);
+    ArraySorter.sortByMillisecondsDate(purchases);
   }
 
 
