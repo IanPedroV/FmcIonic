@@ -1,5 +1,5 @@
 export class DateFormatter {
-  static formatDate(date) {
+  static formatMillisecondsToDate(date) {
     let options = {
       year: 'numeric',
       month: 'numeric',
@@ -8,6 +8,6 @@ export class DateFormatter {
       minute: 'numeric',
       second: 'numeric'
     };
-    return new Date(parseInt(date)).toLocaleDateString('en-GB', options);
+    return new Date(parseInt(date)).toLocaleDateString('pt-br', options);
   }
 }

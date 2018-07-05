@@ -32,7 +32,7 @@ import {LoginDaoProvider} from '../providers/user-dao/login-dao';
 import {ProfilePage} from "../pages/profile/profile";
 import {PurchaseHistoryPage} from "../pages/purchase-history/purchase-history";
 import {PurchaseDetailsPage} from "../pages/purchase-details/purchase-details";
-import { VideoNotificationProvider } from '../providers/video-service/video-service';
+import { VideoServiceProvider } from '../providers/video-service/video-service';
 import {OneSignal} from "@ionic-native/onesignal";
 
 @NgModule({
@@ -86,7 +86,7 @@ import {OneSignal} from "@ionic-native/onesignal";
     UserServiceProvider,
     LoginDaoProvider,
     IapServiceProvider,
-    VideoNotificationProvider,
+    VideoServiceProvider,
     OneSignal
   ]
 })

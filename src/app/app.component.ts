@@ -9,7 +9,7 @@ import {ProfilePage} from "../pages/profile/profile";
 import {UserServiceProvider} from "../providers/user-service/user-service";
 import {LoginDaoProvider} from "../providers/user-dao/login-dao";
 import {Observable} from "rxjs/Observable";
-import {VideoNotificationProvider} from "../providers/video-service/video-service";
+import {VideoServiceProvider} from "../providers/video-service/video-service";
 import {OneSignal} from "@ionic-native/onesignal";
 
 
@@ -29,8 +29,8 @@ export class MyApp {
     {title: 'Perfil', component: ProfilePage, icon: 'contact', showWhenLogged: true}
   ];
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private _userService: UserServiceProvider,
-              private _loginDaoProvider: LoginDaoProvider, private _videoNotificationProvider: VideoNotificationProvider,
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+              private _userService: UserServiceProvider, private _loginDaoProvider: LoginDaoProvider,
               public oneSignal: OneSignal) {
     platform.ready().then(() => {
       splashScreen.hide();

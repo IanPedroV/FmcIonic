@@ -26,7 +26,7 @@ export class PurchaseDetailsPage {
   }
 
   formatPurchaseDate() {
-    return DateFormatter.formatDate(this.purchase.purchaseTimeMillis);
+    return DateFormatter.formatMillisecondsToDate(this.purchase.purchaseTimeMillis);
   }
 
   test() {
