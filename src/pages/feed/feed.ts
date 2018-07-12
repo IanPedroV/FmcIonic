@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {IonicPage} from 'ionic-angular';
-import {VideoServiceProvider} from "../../providers/video-service/video-service";
-import {Video} from "../../models/video";
-import {ArraySorter} from "../../utils/arraySorter";
+import { Component } from '@angular/core';
+import { IonicPage } from 'ionic-angular';
+import { Video } from "../../models/video";
+import { ArraySorter } from "../../utils/arraySorter";
+import { VideoServiceProvider } from '../../providers/video-service/video-service';
 
 
 @IonicPage()
@@ -17,7 +17,8 @@ export class FeedPage {
   constructor(private _videoServiceProvider: VideoServiceProvider) {
     _videoServiceProvider.list().subscribe((videos) => {
       this.videos = videos;
-      ArraySorter.sortByDate(this.videos,"publishDate");
+      this.videos.length = (this.videos.length > 10) ? 10 : this.videos.length;
+      ArraySorter.sortByDate(this.videos, "publishDate");
     });
   }
 
@@ -27,5 +28,8 @@ export class FeedPage {
       " às " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
   }
 
+  openLink(url) {
+    window.open(url, '_system')
+  }
 
 }

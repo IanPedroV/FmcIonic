@@ -1,6 +1,7 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Category} from "../../models/category";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Category } from "../../models/category";
+import { MyApp } from '../../app/app.component';
 
 @Injectable()
 export class CategoriesServiceProvider {
@@ -9,7 +10,7 @@ export class CategoriesServiceProvider {
   }
 
   list() {
-    return this._http.get<Category[]>('http://192.168.15.13:3000/categories');
+    return this._http.get<Category[]>(MyApp.apiUrl + '/categories');
   }
 
 }

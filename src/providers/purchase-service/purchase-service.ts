@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {ProductsServiceProvider} from "../products-service/products-service";
 import {ArraySorter} from "../../utils/arraySorter";
+import { MyApp } from '../../app/app.component';
 
 @Injectable()
 export class PurchaseServiceProvider {
@@ -11,25 +12,25 @@ export class PurchaseServiceProvider {
   }
 
   list() {
-    return this._http.get<any[]>('http://192.168.15.13:3000/purchases');
+    return this._http.get<any[]>(MyApp.apiUrl +'/purchases');
   }
 
   get(id: number) {
-    return this._http.get<any[]>('http://192.168.15.13:3000/purchases/purchase/' + id);
+    return this._http.get<any[]>(MyApp.apiUrl +'/purchases/purchase/' + id);
 
   }
 
   create(purchase) {
     console.log('creating purchase');
-    return this._http.post('http://192.168.15.13:3000/purchases/purchase', purchase);
+    return this._http.post(MyApp.apiUrl +'/purchases/purchase', purchase);
   }
 
   update(purchase) {
-    return this._http.put('http://192.168.15.13:3000/purchases/purchase/' + purchase.orderId, purchase);
+    return this._http.put(MyApp.apiUrl +'/purchases/purchase/' + purchase.orderId, purchase);
   }
 
   verify(data) {
-    return this._http.post('http://192.168.15.13:3000/purchases/verify', data);
+    return this._http.post(MyApp.apiUrl +'/purchases/verify', data);
   }
 
 

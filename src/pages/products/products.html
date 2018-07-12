@@ -4,8 +4,8 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <div class="titleicon">
-      <img src="https://gallery.mailchimp.com/cc1505233db775a46edcf7259/images/a0fd24ee-e4ff-4916-92f2-f675891f21f3.png"
-           width="100px"/>
+      <img src="https://gallery.mailchimp.com/cc1505233db775a46edcf7259/images/a0fd24ee-e4ff-4916-92f2-f675891f21f3.png" width="100px"
+      />
     </div>
   </ion-navbar>
 
@@ -20,11 +20,14 @@
 
 
 <ion-content>
+  <button ion-button (click)="testToken()">TESTAR TOKEN</button>
   <div [ngSwitch]="category">
     <ng-container *ngFor="let category of categoryList">
       <ion-list *ngSwitchCase="category.name">
         <ion-item *ngFor="let product of getProducts(category)" (click)="showDetails(product)">
-          <ion-thumbnail item-start><img src={{product.image}}></ion-thumbnail>
+          <ion-thumbnail item-start>
+            <img src={{product.image}}>
+          </ion-thumbnail>
           <h2>{{product.name}}</h2>
           <p>{{product.description}}</p>
           <button ion-button clear item-end color="warning">Ver</button>

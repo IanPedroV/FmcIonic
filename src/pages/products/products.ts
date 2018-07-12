@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
-import {IonicPage, LoadingController, Modal, ModalController} from 'ionic-angular';
-import {Product} from "../../models/product";
-import {Category} from "../../models/category";
-import {ProductDetailsPage} from "../product-details/product-details";
-import {ProductsServiceProvider} from "../../providers/products-service/products-service";
-import {CategoriesServiceProvider} from "../../providers/categories-service/categories-service";
+import { Component } from '@angular/core';
+import { IonicPage, LoadingController, Modal, ModalController } from 'ionic-angular';
+import { Product } from "../../models/product";
+import { Category } from "../../models/category";
+import { ProductDetailsPage } from "../product-details/product-details";
+import { ProductsServiceProvider } from "../../providers/products-service/products-service";
+import { CategoriesServiceProvider } from "../../providers/categories-service/categories-service";
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 
 @IonicPage()
 @Component({
@@ -16,28 +17,28 @@ export class ProductsPage {
   productList: Array<Product> = [];
   categoryList: Array<Category> =
     [
-      {id: 1, name: 'Vips', description: 'Teste'},
-      {id: 2, name: 'Passes', description: 'Teste'},
-      {id: 3, name: 'Caixas', description: 'Teste'},
+      { id: 1, name: 'Vips', description: 'Teste' },
+      { id: 2, name: 'Passes', description: 'Teste' },
+      { id: 3, name: 'Caixas', description: 'Teste' },
     ];
 
-  constructor(private _modal: ModalController, private _loadingCtrl: LoadingController,
-              private _productsService: ProductsServiceProvider, private _categoryService: CategoriesServiceProvider) {
+  constructor(private _modal: ModalController, private _loadingCtrl: LoadingController, private _userService: UserServiceProvider,
+    private _productsService: ProductsServiceProvider, private _categoryService: CategoriesServiceProvider) {
   }
 
 
   ionViewDidLoad() {
-    let loading = this._loadingCtrl.create({content: 'Carregando produtos...'});
+    let loading = this._loadingCtrl.create({ content: 'Carregando produtos...' });
     loading.present();
     this._categoryService.list()
       .mergeMap((categories) => {
         //this.categoryList = categories;
         return this._productsService.list();
       }).subscribe(products => {
-      loading.dismiss();
-      this.productList = products;
-      this.assignCatetories(this.productList);
-    });
+        loading.dismiss();
+        this.productList = products;
+        this.assignCatetories(this.productList);
+      });
   }
 
   private assignCatetories(products) {
@@ -55,5 +56,11 @@ export class ProductsPage {
 
   getProducts(category: Category) {
     return this.productList.filter(product => product.category === category);
+  }
+
+  testToken() {
+    this._userService.getToken().subscribe((response) => {
+      console.log("Sucesso: " + response);
+    });
   }
 }

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="9" id="br.com.familiacraft.app" version="0.0.9" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="10" id="br.com.familiacraft.app" version="0.0.10" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>FamiliaCraft</name>
     <description>FamiliaCraft App</description>
     <author email="contato@familiacraft.com.br" href="https://familiacraft.com.br/">FamiliaCraft Team</author>
@@ -22,7 +22,7 @@
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
-            <activity android:debuggable="true" />
+            <activity android:debuggable="false" />
         </edit-config>
         <config-file parent="/manifest" target="AndroidManifest.xml">
             <uses-permission android:name="com.android.vending.BILLING" />

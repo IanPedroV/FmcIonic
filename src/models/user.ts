@@ -13,4 +13,5 @@ export interface User {
   lastLogin: string;
   ip: string;
   purchaseList: Purchase[];
+  token: string;
 }

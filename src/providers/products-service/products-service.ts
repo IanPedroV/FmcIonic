@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Product} from "../../models/product";
+import { MyApp } from '../../app/app.component';
 
 @Injectable()
 export class ProductsServiceProvider {
@@ -13,7 +14,7 @@ export class ProductsServiceProvider {
   }
 
   list() {
-    return this._http.get<Product[]>('http://192.168.15.13:3000/products');
+    return this._http.get<Product[]>(MyApp.apiUrl +'/products');
   }
 
 }

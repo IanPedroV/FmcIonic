@@ -12,10 +12,11 @@
 
 <ion-content class="cards-bg social-cards">
 
-  <ion-card *ngFor="let video of videos">
+  <ion-card *ngFor="let video of videos" (click)="openLink(video.url)">
     <ion-item>
       <ion-avatar item-start>
-        <img src="assets/img/avatar-spok.jpg">
+        <img *ngIf="video.channelName === 'thecreepersoficial'" src="assets/img/avatar-spok.jpg">
+        <img *ngIf="video.channelName === 'BaixaMemoria'" src="assets/img/avatar-bm.jpg">
       </ion-avatar>
       <h2>{{video.channelName}}</h2>
       <p>{{formatDate(video.publishDate)}}</p>

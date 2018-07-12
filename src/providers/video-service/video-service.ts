@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Video} from "../../models/video";
+import { MyApp } from '../../app/app.component';
 
 @Injectable()
 export class VideoServiceProvider {
@@ -10,7 +11,7 @@ export class VideoServiceProvider {
   }
 
   list() {
-    return this._http.get<Video[]>('http://192.168.15.13:3000/videos');
+    return this._http.get<Video[]>(MyApp.apiUrl +'/videos');
   }
 
 }

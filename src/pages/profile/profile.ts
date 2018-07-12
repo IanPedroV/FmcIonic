@@ -3,7 +3,6 @@ import {IonicPage, Modal, ModalController, NavController, ToastController, ViewC
 import {Product} from "../../models/product";
 import {PurchaseHistoryPage} from "../purchase-history/purchase-history";
 import {UserServiceProvider} from "../../providers/user-service/user-service";
-import {LoginPage} from "../login/login";
 import {TabsPage} from "../tabs/tabs";
 import {LoginDaoProvider} from "../../providers/user-dao/login-dao";
 

@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
-import {UserServiceProvider} from "../../providers/user-service/user-service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {TabsPage} from "../tabs/tabs";
-import {LoginDaoProvider} from "../../providers/user-dao/login-dao";
-import {PurchaseServiceProvider} from "../../providers/purchase-service/purchase-service";
+import { Component } from '@angular/core';
+import { AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController } from 'ionic-angular';
+import { UserServiceProvider } from "../../providers/user-service/user-service";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { TabsPage } from "../tabs/tabs";
+import { LoginDaoProvider } from "../../providers/user-dao/login-dao";
+import { PurchaseServiceProvider } from "../../providers/purchase-service/purchase-service";
 
 @IonicPage()
 @Component({
@@ -28,19 +28,21 @@ export class LoginPage {
   });
 
   constructor(private _alertCtrl: AlertController, private _userService: UserServiceProvider, private _loadingController:
-                LoadingController, private _navController: NavController, private _toastController: ToastController,
-              private _navParams: NavParams, private _loginDao: LoginDaoProvider, private _purchaseService: PurchaseServiceProvider) {
+    LoadingController, private _navController: NavController, private _toastController: ToastController,
+    private _navParams: NavParams, private _loginDao: LoginDaoProvider, private _purchaseService: PurchaseServiceProvider) {
   }
 
   login() {
-    let loading = this._loadingController.create({content: "Realizando login..."});
+    let loading = this._loadingController.create({ content: "Realizando login..." });
     loading.present();
     this._userService.login(this.email, this.password).subscribe((result) => {
       loading.dismiss();
-      this._loginDao.save(result['user'][0].email, result['user'][0].passwordHash);
-      this._userService.user = result['user'][0];
-      this._purchaseService.assignProducts(result['purchaseList']);
-      this._userService.user.purchaseList = result['purchaseList'];
+      this._loginDao.save(result['user'].email, result['user'].passwordHash, result['token']);
+      this._userService.user = result['user'];
+      this._purchaseService.assignProducts(result['user'].purchaseList);
+      this._userService.getToken().subscribe((response) => {
+        console.log("Sucesso: " + response);
+      });
 
       if (Object.keys(this._navParams['data']).length === 0) {
         this._navController.setRoot(TabsPage);
