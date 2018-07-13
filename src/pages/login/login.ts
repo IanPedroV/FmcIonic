@@ -29,7 +29,7 @@ export class LoginPage {
 
   constructor(private _alertCtrl: AlertController, private _userService: UserServiceProvider, private _loadingController:
     LoadingController, private _navController: NavController, private _toastController: ToastController,
-    private _navParams: NavParams, private _loginDao: LoginDaoProvider, private _purchaseService: PurchaseServiceProvider) {
+    private _navParams: NavParams, private _loginDao: LoginDaoProvider) {
   }
 
   login() {
@@ -39,10 +39,8 @@ export class LoginPage {
       loading.dismiss();
       this._loginDao.save(result['user'].email, result['user'].passwordHash, result['token']);
       this._userService.user = result['user'];
-      this._purchaseService.assignProducts(result['user'].purchaseList);
-      this._userService.getToken().subscribe((response) => {
-        console.log("Sucesso: " + response);
-      });
+      PurchaseServiceProvider.assignProducts(result['user'].purchaseList);
+      this._userService.getToken().subscribe(() => {});
 
       if (Object.keys(this._navParams['data']).length === 0) {
         this._navController.setRoot(TabsPage);

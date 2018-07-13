@@ -5,7 +5,6 @@ import { Category } from "../../models/category";
 import { ProductDetailsPage } from "../product-details/product-details";
 import { ProductsServiceProvider } from "../../providers/products-service/products-service";
 import { CategoriesServiceProvider } from "../../providers/categories-service/categories-service";
-import { UserServiceProvider } from '../../providers/user-service/user-service';
 
 @IonicPage()
 @Component({
@@ -22,7 +21,7 @@ export class ProductsPage {
       { id: 3, name: 'Caixas', description: 'Teste' },
     ];
 
-  constructor(private _modal: ModalController, private _loadingCtrl: LoadingController, private _userService: UserServiceProvider,
+  constructor(private _modal: ModalController, private _loadingCtrl: LoadingController,
     private _productsService: ProductsServiceProvider, private _categoryService: CategoriesServiceProvider) {
   }
 
@@ -58,9 +57,4 @@ export class ProductsPage {
     return this.productList.filter(product => product.category === category);
   }
 
-  testToken() {
-    this._userService.getToken().subscribe((response) => {
-      console.log("Sucesso: " + response);
-    });
-  }
 }

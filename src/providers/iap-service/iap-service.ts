@@ -1,11 +1,12 @@
-import {Injectable} from '@angular/core';
-import {ModalController, Platform} from "ionic-angular";
-import {ProductsServiceProvider} from "../products-service/products-service";
-import {Product} from "../../models/product";
-import {PurchaseServiceProvider} from "../purchase-service/purchase-service";
-import {UserServiceProvider} from "../user-service/user-service";
-import {Purchase} from "../../models/purchase";
-import {PurchaseDetailsPage} from "../../pages/purchase-details/purchase-details";
+import { Injectable } from '@angular/core';
+import { ModalController, Platform } from "ionic-angular";
+import { ProductsServiceProvider } from "../products-service/products-service";
+import { Product } from "../../models/product";
+import { PurchaseServiceProvider } from "../purchase-service/purchase-service";
+import { UserServiceProvider } from "../user-service/user-service";
+import { Purchase } from "../../models/purchase";
+import { PurchaseDetailsPage } from "../../pages/purchase-details/purchase-details";
+import { MyApp } from '../../app/app.component';
 
 declare var store: any;
 
@@ -15,14 +16,15 @@ export class IapServiceProvider {
   constructor(public platform: Platform, private _productsService: ProductsServiceProvider, private _purchaseService:
     PurchaseServiceProvider, private _userService: UserServiceProvider, private modalController: ModalController) {
     platform.ready().then(() => {
-        if (store)
-          this.initProducts();
-      }
+      if (store)
+        this.initProducts();
+    }
     )
   }
 
   initProducts() {
     let product: any = {};
+
     store.validator = ((data, callback) => {
       this._purchaseService.verify(data).subscribe((response) => callback(response['verified'], response['transaction']));
     });
@@ -38,9 +40,12 @@ export class IapServiceProvider {
         console.log("APPROVING");
         order.verify();
         let purchase = this.orderToPurchase(order, "APROVADA", 0, 0);
-        this._purchaseService.create(purchase).subscribe((purchase: Purchase) => {
+
+        this._purchaseService.create(purchase).mergeMap((getToken) => {
+          return getToken;
+        }).subscribe((purchase: Purchase) => {
           this._userService.user.purchaseList.push(purchase);
-          this._purchaseService.assignProduct(purchase, this._userService.user.purchaseList);
+          PurchaseServiceProvider.assignProduct(purchase, this._userService.user.purchaseList);
           this.modalController.create(PurchaseDetailsPage, purchase).present();
           // this._alertCtrl.create({
           //   title: "SUCESSO!",
@@ -55,31 +60,21 @@ export class IapServiceProvider {
           //   ]
           // }).present();
         });
-
       });
 
       store.when(productFromAPI.id).verified((order) => {
-        let purchase = this.orderToPurchase(order, "VERIFICADA", 0, 0);
-        this._purchaseService.update(purchase).subscribe((purchase) => {
-          console.log("VERIFYING");
-          this._userService.updatePurchase(purchase);
-        });
+        console.log("VERIFYING");
         order.finish();
       });
 
       store.when(productFromAPI.id).finished((order) => {
-        let purchase = this.orderToPurchase(order, "AGUARDANDO LIBERACAO", 1, 0);
-        this._purchaseService.update(purchase).subscribe((purchase) => {
-          console.log("FINISHING");
-          this._userService.updatePurchase(purchase);
-        });
+        console.log("FINISHING");
       });
 
       store.when(productFromAPI.id).refunded(() => {
       });
 
       store.when(productFromAPI.id).cancelled(() => {
-        // console.log(data['additionalData'].pocketNick);
       });
 
       store.when(productFromAPI.id).expired((order) => {

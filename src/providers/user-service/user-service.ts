@@ -12,8 +12,8 @@ import { ArraySorter } from '../../utils/arraySorter';
 export class UserServiceProvider {
   private _user: User;
 
-  constructor(private _http: HttpClient, private _purchaseService: PurchaseServiceProvider,
-    private _toastController: ToastController, private _loginDao: LoginDaoProvider) {
+  constructor(private _http: HttpClient, private _toastController: ToastController,
+    private _loginDao: LoginDaoProvider) {
 
   }
 
@@ -31,7 +31,12 @@ export class UserServiceProvider {
 
   validateToken() {
     let headers = new HttpHeaders().set('Authorization', this._user.token);
-    return this._http.post(MyApp.apiUrl + '/users/validateToken/', { user: this._user }, { headers: headers, observe: "response" });
+    return this._http.post(MyApp.apiUrl + '/users/validateToken/',
+      { user: this._user },
+      {
+        headers: headers,
+        observe: "response"
+      });
   }
 
   get user() {
@@ -46,13 +51,10 @@ export class UserServiceProvider {
     this._loginDao.getStorage().subscribe(loginInfo => {
       if (loginInfo) {
         this.login(loginInfo.email, loginInfo.passwordHash).subscribe((result) => {
-          console.log(result['user']);
           this.user = result['user'];
-          this._purchaseService.assignProducts(result['user'].purchaseList);
+          PurchaseServiceProvider.assignProducts(result['user'].purchaseList);
 
-          this.getToken().subscribe((response) => {
-            console.log("Sucesso: " + response);
-          });
+          this.getToken().subscribe(() => { });
 
           this._toastController.create({
             message: 'Login verificado com sucesso!',
@@ -72,11 +74,15 @@ export class UserServiceProvider {
 
   getToken(): Observable<any> {
     return this.validateToken().map((response) => {
-      console.log(response.status);
-        console.log("Token era valida e foi conservada.");
-        return this._user.token;
+      console.log("Token era valida e foi conservada.");
+      return this._user.token;
     }).catch((err) => {
-      console.log("Token era inválida, porém foi atualizada!");
+      if (err.status === 401) {
+        console.log("Token era inválida, porém foi atualizada!");
+      } else if (err.status === 403) {
+        console.log("Token era inválida, porém as Permissões insuficientes!");
+
+      }
       return this.login(this._user.email, this._user.passwordHash).map((response) => {
         this._user.token = response['user'].token;
         this._loginDao.save(this.user.email, this.user.passwordHash, response['token']);
@@ -89,7 +95,7 @@ export class UserServiceProvider {
   updatePurchase(purchase) {
     let objIndex = this.user.purchaseList.findIndex((obj => obj.orderId === purchase.orderId));
     this.user.purchaseList[objIndex] = purchase;
-    this._purchaseService.assignProduct(this.user.purchaseList[objIndex], this.user.purchaseList);
+    PurchaseServiceProvider.assignProduct(this.user.purchaseList[objIndex], this.user.purchaseList);
   }
 
 }

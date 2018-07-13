@@ -7,7 +7,6 @@ import { LoginPage } from "../pages/login/login";
 import { RegisterPage } from "../pages/register/register";
 import { ProfilePage } from "../pages/profile/profile";
 import { UserServiceProvider } from "../providers/user-service/user-service";
-import { LoginDaoProvider } from "../providers/user-dao/login-dao";
 import { OneSignal } from "@ionic-native/onesignal";
 
 
@@ -19,7 +18,7 @@ export class MyApp {
   @ViewChild('conteudo') nav: NavController;
   rootPage: any = TabsPage;
   sub: any;
-  static apiUrl = "http://localhost";
+  static apiUrl = "http://192.168.15.13";
 
   public pageList = [
     { title: 'Login', component: LoginPage, icon: 'lock', showWhenLogged: false },
