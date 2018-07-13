@@ -20,6 +20,7 @@
 
 
 <ion-content>
+  <button ion-button (click)="test()">TESTE</button>
   <div [ngSwitch]="category">
     <ng-container *ngFor="let category of categoryList">
       <ion-list *ngSwitchCase="category.name">

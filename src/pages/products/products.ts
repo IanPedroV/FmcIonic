@@ -5,6 +5,7 @@ import { Category } from "../../models/category";
 import { ProductDetailsPage } from "../product-details/product-details";
 import { ProductsServiceProvider } from "../../providers/products-service/products-service";
 import { CategoriesServiceProvider } from "../../providers/categories-service/categories-service";
+import { PurchaseServiceProvider } from '../../providers/purchase-service/purchase-service';
 
 @IonicPage()
 @Component({
@@ -22,7 +23,8 @@ export class ProductsPage {
     ];
 
   constructor(private _modal: ModalController, private _loadingCtrl: LoadingController,
-    private _productsService: ProductsServiceProvider, private _categoryService: CategoriesServiceProvider) {
+    private _productsService: ProductsServiceProvider, private _categoryService: CategoriesServiceProvider,
+    private _purchaseService: PurchaseServiceProvider) {
   }
 
 
@@ -55,6 +57,10 @@ export class ProductsPage {
 
   getProducts(category: Category) {
     return this.productList.filter(product => product.category === category);
+  }
+
+  test() {
+    console.log('a')
   }
 
 }

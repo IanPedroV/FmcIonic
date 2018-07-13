@@ -26,76 +26,72 @@ export class IapServiceProvider {
     let product: any = {};
 
     store.validator = ((data, callback) => {
-      this._purchaseService.verify(data).subscribe((response) => callback(response['verified'], response['transaction']));
-    });
+      this._purchaseService.verify(data).mergeMap((getToken) => {
+        return getToken;
+      }).subscribe(response => {
+        console.log('SUCESSO NA PROMISE!');
+        console.log(response);
+        callback(response['verified'], response['transaction']);
+      });
 
-    this._productsService.list().subscribe(productsFromAPI => productsFromAPI.forEach((productFromAPI: Product) => {
-      product = {
-        id: productFromAPI.id.toString(),
-        alias: productFromAPI.id.toString(),
-        type: productFromAPI.type
-      };
+      this._productsService.list().subscribe(productsFromAPI => productsFromAPI.forEach((productFromAPI: Product) => {
+        product = {
+          id: productFromAPI.id.toString(),
+          alias: productFromAPI.id.toString(),
+          type: productFromAPI.type
+        };
 
-      store.when(productFromAPI.id).approved((order) => {
-        console.log("APPROVING");
-        order.verify();
-        let purchase = this.orderToPurchase(order, "APROVADA", 0, 0);
+        store.when(productFromAPI.id).approved((order) => {
+          console.log("WILL VERIFY");
+          order.verify();
+          let purchase = this.orderToPurchase(order, "APROVADA", 0, 0);
 
-        this._purchaseService.create(purchase).mergeMap((getToken) => {
-          return getToken;
-        }).subscribe((purchase: Purchase) => {
-          this._userService.user.purchaseList.push(purchase);
-          PurchaseServiceProvider.assignProduct(purchase, this._userService.user.purchaseList);
-          this.modalController.create(PurchaseDetailsPage, purchase).present();
-          // this._alertCtrl.create({
-          //   title: "SUCESSO!",
-          //   message: "Parabéns pela sua compra! A mesma foi realizada com sucesso.",
-          //   buttons: [
-          //     {
-          //       text: 'Ver compra',
-          //       handler: () => {
-          //         this.modalController.create(PurchaseDetailsPage, purchase).present();
-          //       }
-          //     },
-          //   ]
-          // }).present();
+          this._purchaseService.create(purchase).mergeMap((getToken) => {
+            return getToken;
+          }).subscribe((purchaseResponse) => {
+            let purchase = purchaseResponse['body'];
+            console.log("Debug 1");
+            console.log(purchase);
+            this._userService.user.purchaseList.push(purchase);
+            PurchaseServiceProvider.assignProduct(purchase, this._userService.user.purchaseList);
+            this.modalController.create(PurchaseDetailsPage, purchase).present();
+          });
         });
-      });
 
-      store.when(productFromAPI.id).verified((order) => {
-        console.log("VERIFYING");
-        order.finish();
-      });
+        store.when(productFromAPI.id).verified((order) => {
+          console.log("VERIFYING");
+          order.finish();
+        });
 
-      store.when(productFromAPI.id).finished((order) => {
-        console.log("FINISHING");
-      });
+        store.when(productFromAPI.id).finished((order) => {
+          console.log("FINISHING");
+        });
 
-      store.when(productFromAPI.id).refunded(() => {
-      });
+        store.when(productFromAPI.id).refunded(() => {
+        });
 
-      store.when(productFromAPI.id).cancelled(() => {
-      });
+        store.when(productFromAPI.id).cancelled(() => {
+        });
 
-      store.when(productFromAPI.id).expired((order) => {
-        console.log(order.id + " está expirada!");
-      });
+        store.when(productFromAPI.id).expired((order) => {
+          console.log(order.id + " está expirada!");
+        });
 
-      console.log(product);
-      store.register(product);
-    }));
+        console.log(product);
+        store.register(product);
+      }));
 
-    store.error((err) => console.log(err));
-    this.initStore();
-  }
+      store.error((err) => console.log(err));
+      this.initStore();
+    }
 
   initStore() {
-    store.verbosity = store.DEBUG;
-    store.ready(() => {
-      console.log("STORE READY!")
-    });
-    store.refresh();
-  }
+      store.verbosity = store.DEBUG;
+      store.ready(() => {
+        console.log("STORE READY!")
+      });
+      store.refresh();
+    }
 
 
   static getStore() {

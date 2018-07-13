@@ -9,6 +9,7 @@ import {TabsPage} from '../pages/tabs/tabs';
 import {ProductsServiceProvider} from '../providers/products-service/products-service';
 import {HttpClientModule} from "@angular/common/http";
 import {CategoriesServiceProvider} from '../providers/categories-service/categories-service';
+import 'rxjs/add/operator/switchMap'
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/mergeMap';

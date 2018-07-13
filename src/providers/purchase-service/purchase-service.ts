@@ -21,13 +21,18 @@ export class PurchaseServiceProvider {
     });
   }
 
-  verify(data) {
-    return this._http.post(MyApp.apiUrl + '/purchases/verify', data);
+  verify(data): Observable<any> {
+    return this._userService.getToken().map((token) => {
+      let headers = new HttpHeaders().set('Authorization', token);
+      return this._http.post(MyApp.apiUrl + '/purchases/verify', data,
+        { headers: headers});
+    });
   }
+
   static assignProduct(purchase, purchases: Array<any>) {
-    purchase.product = ProductsServiceProvider.products.find(product => product.id === parseInt(purchase.productId));
-    ArraySorter.sortByMillisecondsDate(purchases);
-  }
+  purchase.product = ProductsServiceProvider.products.find(product => product.id === parseInt(purchase.productId));
+  ArraySorter.sortByMillisecondsDate(purchases);
+}
 
   static assignProducts(purchases: Array<any>) {
     purchases.forEach(purchase => purchase.product = ProductsServiceProvider.products.find(product =>
