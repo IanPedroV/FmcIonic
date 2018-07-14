@@ -58,9 +58,4 @@ export class ProductsPage {
   getProducts(category: Category) {
     return this.productList.filter(product => product.category === category);
   }
-
-  test() {
-    console.log('a')
-  }
-
 }

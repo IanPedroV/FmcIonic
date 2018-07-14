@@ -90,7 +90,7 @@ import {OneSignal} from "@ionic-native/onesignal";
     LoginDaoProvider,
     IapServiceProvider,
     VideoServiceProvider,
-    OneSignal
+    OneSignal,
   ]
 })
 export class AppModule {
