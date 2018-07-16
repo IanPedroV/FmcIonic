@@ -30,7 +30,7 @@ export class ProductsPage {
 
   ionViewDidLoad() {
     let loading = this._loadingCtrl.create({ content: 'Carregando produtos...' });
-    loading.present();
+    // loading.present();
     this._categoryService.list()
       .mergeMap((categories) => {
         //this.categoryList = categories;

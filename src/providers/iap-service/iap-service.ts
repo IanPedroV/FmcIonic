@@ -30,7 +30,6 @@ export class IapServiceProvider {
         return getToken;
       }).subscribe(response => {
         console.log('SUCESSO NA PROMISE!');
-        console.log(response);
         callback(response['verified'], response['transaction']);
       });
     });

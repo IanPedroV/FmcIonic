@@ -1,9 +1,25 @@
+<div *ngIf="showSplash" class="splash">
+  <div class="sk-cube-grid">
+    <div class="sk-cube sk-cube1"></div>
+    <div class="sk-cube sk-cube2"></div>
+    <div class="sk-cube sk-cube3"></div>
+    <div class="sk-cube sk-cube4"></div>
+    <div class="sk-cube sk-cube5"></div>
+    <div class="sk-cube sk-cube6"></div>
+    <div class="sk-cube sk-cube7"></div>
+    <div class="sk-cube sk-cube8"></div>
+    <div class="sk-cube sk-cube9"></div>
+  </div>
+</div>
+
 <ion-nav #myNav [root]="rootPage"></ion-nav>
 <ion-split-pane>
   <ion-menu [content]="conteudo" id="cabecalho-menu">
     <ion-content *ngIf="getUser(); else loggedContent">
       <ion-item class="cabecalho-menu">
-        <ion-avatar item-start><img [src]="getUser().avatar"></ion-avatar>
+        <ion-avatar item-start>
+          <img [src]="getUser().avatar">
+        </ion-avatar>
         <h2>{{getUser().pocketNick}}</h2>
         <h2>{{getUser().email}}</h2>
       </ion-item>
@@ -18,7 +34,9 @@
     <ng-template #loggedContent>
       <ion-content>
         <ion-item class="cabecalho-menu">
-          <ion-avatar item-start><img src="https://minotar.net/helm/Steve.png"></ion-avatar>
+          <ion-avatar item-start>
+            <img src="https://minotar.net/helm/Steve.png">
+          </ion-avatar>
           <h2>Visitante</h2>
         </ion-item>
         <ion-list>
