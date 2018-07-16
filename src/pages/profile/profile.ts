@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
-import {IonicPage, Modal, ModalController, NavController, ToastController, ViewController} from 'ionic-angular';
-import {Product} from "../../models/product";
-import {PurchaseHistoryPage} from "../purchase-history/purchase-history";
-import {UserServiceProvider} from "../../providers/user-service/user-service";
-import {TabsPage} from "../tabs/tabs";
-import {LoginDaoProvider} from "../../providers/user-dao/login-dao";
+import { Component } from '@angular/core';
+import { IonicPage, Modal, ModalController, NavController, ToastController, ViewController, AlertController } from 'ionic-angular';
+import { Product } from "../../models/product";
+import { PurchaseHistoryPage } from "../purchase-history/purchase-history";
+import { UserServiceProvider } from "../../providers/user-service/user-service";
+import { TabsPage } from "../tabs/tabs";
+import { LoginDaoProvider } from "../../providers/user-dao/login-dao";
 
 @IonicPage()
 @Component({
@@ -15,8 +15,9 @@ export class ProfilePage {
   public product: Product;
   public user;
 
-  constructor(private toastCtrl: ToastController, private viewController: ViewController, private modal: ModalController,
-              private _userService: UserServiceProvider, private _loginDao: LoginDaoProvider, private _navController: NavController) {
+  constructor(private toastCtrl: ToastController, private viewController: ViewController,
+    private modal: ModalController, private _userService: UserServiceProvider, private _loginDao: LoginDaoProvider,
+    private _navController: NavController, private _alertCtrl: AlertController) {
     this.product = viewController.data;
     this.user = this._userService.user;
   }
@@ -32,15 +33,31 @@ export class ProfilePage {
   }
 
   logout() {
-    this._loginDao.remove().then(() => {
-      this._userService.user = null;
-      this._navController.setRoot(TabsPage);
-      this.toastCtrl.create({
-        message: 'Deslogou com sucesso!',
-        duration: 3000
-      }).present();
+    const confirm = this._alertCtrl.create({
+      title: 'Confirme Log-out:',
+      message: 'Você tem certeza que quer sair da sua conta?',
+      buttons: [
+        {
+          text: 'Cancelar',
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this._loginDao.remove().then(() => {
+              this._userService.user = null;
+              this._navController.setRoot(TabsPage);
+              this.toastCtrl.create({
+                message: 'Deslogou com sucesso!',
+                duration: 3000
+              }).present();
+            });
+          }
+        }
+      ]
     });
+    confirm.present();
   }
+
 
   showPurchaseHistory() {
     let myModal: Modal = this.modal.create(PurchaseHistoryPage);

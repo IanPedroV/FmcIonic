@@ -95,4 +95,6 @@
     <plugin name="onesignal-cordova-plugin" spec="^2.4.1" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="^7.0.0" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
 </widget>
