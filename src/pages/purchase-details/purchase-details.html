@@ -1,28 +1,20 @@
 <ion-header>
-  <ion-navbar color="warning">
-    <div class="titleicon">
-      <img src="https://gallery.mailchimp.com/cc1505233db775a46edcf7259/images/a0fd24ee-e4ff-4916-92f2-f675891f21f3.png"
-           width="100px"/>
-    </div>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="closeModal()">
-        <ion-icon name="close"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title></ion-title>
-  </ion-navbar>
+    <ion-navbar color="warning">
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <div class="titleicon">
+          <img src="https://gallery.mailchimp.com/cc1505233db775a46edcf7259/images/a0fd24ee-e4ff-4916-92f2-f675891f21f3.png" width="100px"/>
+        </div>
+        <ion-buttons end>
+          <button ion-button icon-only onclick="location.href='http://spok.live/';">
+            <ion-icon name="game-controller-a"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles"
-      refreshingText="Refreshing...">
-    </ion-refresher-content>
-  </ion-refresher>
 
   <ion-item>
     <h1 text-center>Detalhes da compra:</h1>

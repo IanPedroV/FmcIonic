@@ -14,8 +14,7 @@ export class ProductDetailsPage {
   public product: Product;
 
   constructor(private viewController: ViewController, private _loadingCtrl: LoadingController, private _alertController:
-                AlertController, private _userService: UserServiceProvider, private _navController: NavController,
-              private _iapService: IapServiceProvider) {
+                AlertController, private _userService: UserServiceProvider, private _navController: NavController) {
     this.product = viewController.data;
   }
 

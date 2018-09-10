@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from "../../models/product";
 import { MyApp } from '../../app/app.component';
-import { UserServiceProvider } from '../user-service/user-service';
 
 @Injectable()
 export class ProductsServiceProvider {

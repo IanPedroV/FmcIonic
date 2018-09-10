@@ -19,6 +19,7 @@ export class MyApp {
   rootPage: any = TabsPage;
   sub: any;
   static apiUrl = "https://familiacraft.com";
+  static loginRedirectUrl = "http://spok.live";
 
   public pageList = [
     { title: 'Login', component: LoginPage, icon: 'lock', showWhenLogged: false },
@@ -39,15 +40,17 @@ export class MyApp {
       this._statusBar.hide();
       timer(3000).subscribe(() => this.showSplash = false);
       this._userService.verifyLogin();
-      // this.oneSignal.startInit("ae0983be-3d3a-42f7-a3be-22deb76d1d32", "AAAAIz0mLSU:APA91bH_dFjiwLAtZUIpUhsZZ3d020IWYcFwdt7D_Z6TYNSyDJhFTH3mOdkfTVOuZw2mQ9gByU6OPVfBmS_U5V15q_BPGueJbjLd1D0jnUu3pNktXSzvwqtQpQZsJBYmQB3HRntMDVaGLYho8P9DAlYt1C1lOvs4xw");
-      // this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
-      // this.oneSignal.handleNotificationReceived().subscribe(data => {
-      //   console.log("Dados do Push", data);
-      // });
-      // this.oneSignal.handleNotificationOpened().subscribe(data => {
-      //   console.log("Dados do Push", data);
-      // });
-      // this.oneSignal.endInit();
+      if (this._platform.is('android')) {
+        this.oneSignal.startInit("ae0983be-3d3a-42f7-a3be-22deb76d1d32", "AAAAIz0mLSU:APA91bH_dFjiwLAtZUIpUhsZZ3d020IWYcFwdt7D_Z6TYNSyDJhFTH3mOdkfTVOuZw2mQ9gByU6OPVfBmS_U5V15q_BPGueJbjLd1D0jnUu3pNktXSzvwqtQpQZsJBYmQB3HRntMDVaGLYho8P9DAlYt1C1lOvs4xw");
+        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+        this.oneSignal.handleNotificationReceived().subscribe(data => {
+          console.log("Dados do Push", data);
+        });
+        this.oneSignal.handleNotificationOpened().subscribe(data => {
+          console.log("Dados do Push", data);
+        });
+        this.oneSignal.endInit();
+      }
     });
   }
 

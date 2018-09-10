@@ -4,9 +4,7 @@ import { ProductsServiceProvider } from "../products-service/products-service";
 import { Product } from "../../models/product";
 import { PurchaseServiceProvider } from "../purchase-service/purchase-service";
 import { UserServiceProvider } from "../user-service/user-service";
-import { Purchase } from "../../models/purchase";
 import { PurchaseDetailsPage } from "../../pages/purchase-details/purchase-details";
-import { MyApp } from '../../app/app.component';
 
 declare var store: any;
 

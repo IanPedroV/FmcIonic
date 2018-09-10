@@ -35,7 +35,7 @@ export class ProfilePage {
   logout() {
     const confirm = this._alertCtrl.create({
       title: 'Confirme Log-out:',
-      message: 'Você tem certeza que quer sair da sua conta?',
+      message: 'Você tem certeza que deseja sair da sua conta?',
       buttons: [
         {
           text: 'Cancelar',
