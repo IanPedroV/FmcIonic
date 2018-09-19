@@ -32,7 +32,6 @@ export class PurchaseDetailsPage {
       return getToken;
     }).subscribe((purchaseResponse) => {
       let purchase = purchaseResponse['body'];
-      console.log(purchase)
       this.purchase = purchase;
       this._userService.updatePurchase(purchase);
       refresher.complete();
