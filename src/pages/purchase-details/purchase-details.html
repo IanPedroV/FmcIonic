@@ -14,6 +14,10 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="atualizar($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles" refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
 
   <ion-item>
     <h1 text-center>Detalhes da compra:</h1>
@@ -40,15 +44,19 @@
     <button ion-button full color="secondary" *ngSwitchCase=" purchase.status === 'APROVADA' || purchase.status === 'LIBERADA' || purchase.status === 'ATIVA'">Status:
       {{purchase.status}}
     </button>
-    <button ion-button full color="danger" *ngSwitchCase="purchase.status === 'RECUSADA' || 'EXPIRADA'|| purchase.status === 'INATIVA'">Status:
+    <button ion-button full color="danger" *ngSwitchCase="purchase.status === 'RECUSADA' || 'EXPIRADA'|| purchase.status === 'INATIVA'|| purchase.status === 'FRAUDE'">Status:
       {{purchase.status}}
     </button>
-    <button ion-button full color="primary" *ngSwitchCase="purchase.status ==='VERIFICADA' || purchase.status === 'A LIBERAR'">Status: {{purchase.status}}
+    <button ion-button full color="primary" *ngSwitchCase="purchase.status ==='VERIFICADA' || purchase.status === 'A LIBERAR'">Status:
+      {{purchase.status}}
     </button>
-    <button ion-button full color="light" *ngSwitchCase="purchase.status === 'AGUARDANDO LIBERACAO'">Status: {{purchase.status}}
+    <button ion-button full color="light" *ngSwitchCase="purchase.status === 'AGUARDANDO LIBERACAO'">Status:
+      {{purchase.status}}
     </button>
-    <button ion-button full color="warning" *ngSwitchCase="purchase.status === 'DISPUTADA'">Status: {{purchase.status}}</button>
-    <button ion-button full color="dark" *ngSwitchCase=" purchase.status === 'REEMBOLSADA'">Status: {{purchase.status}}
+    <button ion-button full color="warning" *ngSwitchCase="purchase.status === 'DISPUTADA'">Status:
+      {{purchase.status}}</button>
+    <button ion-button full color="dark" *ngSwitchCase=" purchase.status === 'REEMBOLSADA'">Status:
+      {{purchase.status}}
     </button>
   </ion-toolbar>
 </ion-content>

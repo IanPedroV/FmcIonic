@@ -21,18 +21,26 @@ export class PurchaseServiceProvider {
     });
   }
 
+  get(orderId): Observable<any> {
+    return this._userService.getToken().map((token) => {
+      let headers = new HttpHeaders().set('Authorization', token);
+      return this._http.get(MyApp.apiUrl + '/purchases/purchase/' + orderId,
+        { headers: headers, observe: "response" });
+    });
+  }
+
   verify(data): Observable<any> {
     return this._userService.getToken().map((token) => {
       let headers = new HttpHeaders().set('Authorization', token);
       return this._http.post(MyApp.apiUrl + '/purchases/verify', data,
-        { headers: headers});
+        { headers: headers });
     });
   }
 
   static assignProduct(purchase, purchases: Array<any>) {
-  purchase.product = ProductsServiceProvider.products.find(product => product.id === parseInt(purchase.productId));
-  ArraySorter.sortByMillisecondsDate(purchases);
-}
+    purchase.product = ProductsServiceProvider.products.find(product => product.id === parseInt(purchase.productId));
+    ArraySorter.sortByMillisecondsDate(purchases);
+  }
 
   static assignProducts(purchases: Array<any>) {
     purchases.forEach(purchase => purchase.product = ProductsServiceProvider.products.find(product =>
