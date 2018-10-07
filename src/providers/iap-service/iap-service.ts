@@ -100,10 +100,24 @@ export class IapServiceProvider {
     console.log(order);
     let transaction = order.transaction;
     let receipt = JSON.parse(order.transaction.receipt);
+    let test;
+    if (order['additionalData']) {
+      console.log("A");
+      test = order['additionalData'].pocketNick;
+    } else if (this._userService.user) {
+      console.log("B");
+      test = this._userService.user.pocketNick;
+    } else {
+      console.log("C");
+      test = null;
+    }
+
+    console.log("TESTE!");
+    console.log(test);
     let purchase = {
       productId: order.id,
       userId: this._userService.user ? this._userService.user.id : null,
-      userNick: order['additionalData'] ? order['additionalData'].pocketNick : null,
+      userNick: order['additionalData'] ? order['additionalData'].pocketNick : (this._userService.user ? this._userService.user.pocketNick : null),
       paymentMethod: "Google Play",
       status: status,
       token: transaction.purchaseToken,

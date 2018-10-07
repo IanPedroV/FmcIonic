@@ -54,7 +54,7 @@ export class ProductDetailsPage {
       });
       prompt.present();
     } else {
-      this.buy(null);
+      this.buy(undefined);
     }
   }
 
@@ -62,7 +62,10 @@ export class ProductDetailsPage {
     console.log(this.product);
     let loading = this._loadingCtrl.create({ content: 'Concluindo compra...' });
     loading.present();
-    IapServiceProvider.getStore().order(this.product.id.toString(), { pocketNick: pocketNick }).then(() => loading.dismiss());
+    if (pocketNick !== undefined)
+      IapServiceProvider.getStore().order(this.product.id.toString(), { pocketNick: pocketNick }).then(() => loading.dismiss());
+    else
+      IapServiceProvider.getStore().order(this.product.id.toString()).then(() => loading.dismiss());
   }
 
 }

@@ -12,13 +12,14 @@ import { CategoriesServiceProvider } from "../../providers/categories-service/ca
   templateUrl: 'products.html',
 })
 export class ProductsPage {
-  category: string = 'Vips';
+  category: string = 'Cash';
   productList: Array<Product> = [];
   categoryList: Array<Category> =
     [
-      { id: 1, name: 'Vips', description: 'Teste' },
+      { id: 1, name: 'Cash', description: 'Teste' },
       { id: 2, name: 'Passes', description: 'Teste' },
-      { id: 3, name: 'Caixas', description: 'Teste' },
+      { id: 3, name: 'Frag.', description: 'Teste' },
+      { id: 4, name: 'Vips', description: 'Teste' },
     ];
 
   constructor(private _modal: ModalController, private _loadingCtrl: LoadingController,
