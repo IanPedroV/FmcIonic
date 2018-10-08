@@ -5,6 +5,7 @@ import { ArraySorter } from "../../utils/arraySorter";
 import { MyApp } from '../../app/app.component';
 import { UserServiceProvider } from '../user-service/user-service';
 import { Observable } from '../../../node_modules/rxjs/Observable';
+import { map } from 'rxjs/operator/map';
 
 @Injectable()
 export class PurchaseServiceProvider {
@@ -14,27 +15,49 @@ export class PurchaseServiceProvider {
   }
 
   create(purchase): Observable<any> {
-    return this._userService.getToken().map((token) => {
-      let headers = new HttpHeaders().set('Authorization', token);
-      return this._http.post(MyApp.apiUrl + '/purchases/purchase', purchase,
-        { headers: headers, observe: "response" });
-    });
+    if (this._userService.user !== undefined) {
+      return this._userService.getToken().map((token) => {
+        let headers = new HttpHeaders().set('Authorization', token);
+        return this._http.post(MyApp.apiUrl + '/purchases/purchase',
+          { purchase: purchase },
+          { headers: headers, observe: "response" });
+      });
+    } else {
+      let headers = new HttpHeaders().set('Authorization', "isGuest");
+      return Observable.of(this._http.post(MyApp.apiUrl + '/purchases/purchase',
+        { purchase: purchase, isGuest: true }, { headers: headers, observe: "response" }));
+    }
+
   }
 
   get(orderId): Observable<any> {
-    return this._userService.getToken().map((token) => {
-      let headers = new HttpHeaders().set('Authorization', token);
-      return this._http.get(MyApp.apiUrl + '/purchases/purchase/' + orderId,
-        { headers: headers, observe: "response" });
-    });
+    console.log("GET ORDER!");
+    if (this._userService.user !== undefined) {
+      return this._userService.getToken().map((token) => {
+        let headers = new HttpHeaders().set('Authorization', token);
+        return this._http.get(MyApp.apiUrl + '/purchases/purchase/' + orderId,
+          { headers: headers, observe: "response" });
+      });
+    } else {
+      let headers = new HttpHeaders().set('Authorization', "isGuest");
+      return Observable.of(this._http.get(MyApp.apiUrl + '/purchases/purchase/' + orderId,
+        { headers: headers, observe: "response" }));
+    }
   }
 
   verify(data): Observable<any> {
-    return this._userService.getToken().map((token) => {
-      let headers = new HttpHeaders().set('Authorization', token);
-      return this._http.post(MyApp.apiUrl + '/purchases/verify', data,
-        { headers: headers });
-    });
+    console.log("VERIFY ORDER!");
+    if (this._userService.user !== undefined) {
+      return this._userService.getToken().map((token) => {
+        let headers = new HttpHeaders().set('Authorization', token);
+        return this._http.post(MyApp.apiUrl + '/purchases/verify', data,
+          { headers: headers });
+      });
+    } else {
+      let headers = new HttpHeaders().set('Authorization', 'isGuest');
+      return Observable.of(this._http.post(MyApp.apiUrl + '/purchases/verify', data,
+        { headers: headers }));
+    }
   }
 
   static assignProduct(purchase, purchases: Array<any>) {

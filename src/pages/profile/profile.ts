@@ -43,6 +43,7 @@ export class ProfilePage {
         {
           text: 'Sim',
           handler: () => {
+            this._userService.user = undefined;
             this._loginDao.remove().then(() => {
               this._userService.user = null;
               this._navController.setRoot(TabsPage);

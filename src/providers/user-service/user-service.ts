@@ -10,7 +10,7 @@ import { ArraySorter } from '../../utils/arraySorter';
 
 @Injectable()
 export class UserServiceProvider {
-  private _user: User;
+  private _user: User = undefined;
 
   constructor(private _http: HttpClient, private _toastController: ToastController,
     private _loginDao: LoginDaoProvider) {
