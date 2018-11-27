@@ -48,8 +48,6 @@ export class IapServiceProvider {
           return getToken;
         }).subscribe((purchaseResponse) => {
           let purchase = purchaseResponse['body'];
-          console.log("Debug 1");
-          console.log(purchase);
           if (this._userService.user !== undefined) {
             this._userService.user.purchaseList.push(purchase);
             PurchaseServiceProvider.assignProduct(purchase, this._userService.user.purchaseList);

@@ -18,8 +18,8 @@ export class MyApp {
   @ViewChild('conteudo') nav: NavController;
   rootPage: any = TabsPage;
   sub: any;
-  static apiUrl = "http://192.168.15.13";
-  static loginRedirectUrl = "http://spok.live";
+  static apiUrl = "https://familiacraft.com";
+  static loginRedirectUrl = "https://pocket.familiacraft.com";
 
   public pageList = [
     { title: 'Login', component: LoginPage, icon: 'lock', showWhenLogged: false },
